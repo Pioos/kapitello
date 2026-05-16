@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kapitello – Energia Odnawialna | Zduńska Wola</title>
+  <meta name="description" content="Kapitello – profesjonalne instalacje PV, farmy fotowoltaiczne, doradztwo i kredyt ekologiczny. Twój partner w energii odnawialnej w Zduńskiej Woli.">
+  <meta property="og:title" content="Kapitello – Energia Odnawialna">
+  <meta property="og:description" content="Kompleksowe rozwiązania w zakresie fotowoltaiki, farm słonecznych i finansowania ekologicznego.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══════════════════════════════════════════ -->
+  <header class="header" id="header">
+    <div class="container header__container">
+      <a href="#" class="logo" aria-label="Kapitello – strona główna">
+        <img src="assets/kapitello_logo.png" alt="Kapitello">
+      </a>
+      <button class="menu-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="nav">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <nav class="nav" id="nav" role="navigation" aria-label="Główna nawigacja">
+        <ul class="nav__list">
+          <li><a href="#o-nas"    class="nav__link">O nas</a></li>
+          <li><a href="#oferta"   class="nav__link">Oferta</a></li>
+          <li><a href="#moj-prad" class="nav__link">Mój Prąd 7.0</a></li>
+          <li><a href="#projekty" class="nav__link">Realizacje</a></li>
+          <li><a href="#praca"    class="nav__link">Praca</a></li>
+          <li><a href="#kontakt"  class="btn btn--nav">Kontakt</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ HERO ══════════════════════════════════════════════ -->
+    <section id="hero" class="hero" aria-label="Baner główny">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="hero__overlay" aria-hidden="true"></div>
+      <div class="container hero__content">
+        <div class="hero__badge fade-in-up">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          Energia odnawialna · Zduńska Wola
+        </div>
+        <h1 class="hero__title fade-in-up fade-in-up--delay-1">
+          Energia Przyszłości<br>dla Twojego <span>Domu i Biznesu</span>
+        </h1>
+        <p class="hero__subtitle fade-in-up fade-in-up--delay-2">
+          Kompleksowe rozwiązania w&nbsp;zakresie fotowoltaiki, farm słonecznych
+          i&nbsp;finansowania ekologicznego. Od audytu do montażu – z&nbsp;nami.
+        </p>
+        <div class="hero__buttons fade-in-up fade-in-up--delay-3">
+          <a href="#oferta"  class="btn btn--primary">Sprawdź ofertę</a>
+          <a href="#kontakt" class="btn btn--outline">Bezpłatna wycena</a>
+        </div>
+        <div class="hero__trust fade-in-up fade-in-up--delay-3" aria-label="Zalety firmy">
+          <div class="hero__trust-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Wieloletnie doświadczenie
+          </div>
+          <div class="hero__trust-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Kompleksowa obsługa
+          </div>
+          <div class="hero__trust-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Pomoc w finansowaniu
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ STATS ══════════════════════════════════════════════ -->
+    <section class="stats" aria-label="Nasze liczby">
+      <div class="container">
+        <div class="stats__grid">
+          <div class="stat-item">
+            <div class="stat-item__number" data-target="250" data-suffix="+">0</div>
+            <div class="stat-item__label">Zrealizowanych instalacji</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-item__number" data-target="5" data-suffix=" MW+">0</div>
+            <div class="stat-item__label">Łączna moc instalacji</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-item__number" data-target="8" data-suffix=" lat">0</div>
+            <div class="stat-item__label">Doświadczenia w branży</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ O NAS ══════════════════════════════════════════════ -->
+    <section id="o-nas" class="section about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about__content">
+          <div class="reveal">
+            <p class="section__eyebrow">O firmie</p>
+            <h2 class="section__title" id="about-title">Twoje zaufane źródło czystej energii</h2>
+            <p style="color:var(--text-muted);line-height:1.8;margin-bottom:16px;font-size:1.02rem;">
+              Jesteśmy firmą z wieloletnim doświadczeniem w branży energii odnawialnej. Naszą
+              misją jest dostarczanie nowoczesnych i efektywnych rozwiązań, które pozwalają naszym
+              klientom na niezależność energetyczną i realne oszczędności.
+            </p>
+            <p style="color:var(--text-muted);line-height:1.8;font-size:1.02rem;">
+              Specjalizujemy się w projektowaniu i montażu instalacji fotowoltaicznych dla klientów
+              indywidualnych i biznesowych. Działamy kompleksowo – od audytu, przez projekt i montaż,
+              aż po pomoc w uzyskaniu finansowania.
+            </p>
+          </div>
+          <div class="about__features reveal reveal--delay-1">
+            <div class="about__feature">
+              <div class="about__feature-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="about__feature-body">
+                <h4>Certyfikowani instalatorzy</h4>
+                <p>Nasz zespół posiada wszystkie wymagane uprawnienia i certyfikaty branżowe.</p>
+              </div>
+            </div>
+            <div class="about__feature">
+              <div class="about__feature-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div class="about__feature-body">
+                <h4>Pomoc w finansowaniu</h4>
+                <p>Przeprowadzamy przez cały proces uzyskania kredytu ekologicznego i dotacji.</p>
+              </div>
+            </div>
+            <div class="about__feature">
+              <div class="about__feature-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div class="about__feature-body">
+                <h4>Gwarancja i serwis</h4>
+                <p>Oferujemy długoterminową gwarancję i bieżące wsparcie techniczne po montażu.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ OFERTA ════════════════════════════════════════════ -->
+    <section id="oferta" class="section services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section__header text-center">
+          <p class="section__eyebrow">Czym się zajmujemy</p>
+          <h2 class="section__title" id="services-title">Kompleksowe usługi OZE</h2>
+          <p class="section__subtitle">Od pojedynczej instalacji po farmy megawatowe – jesteśmy z Tobą na każdym etapie.</p>
+        </div>
+        <div class="services__grid">
+
+          <div class="service-card reveal">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+            </div>
+            <h3 class="service-card__title">Instalacje PV</h3>
+            <p class="service-card__desc">Kompleksowe instalacje fotowoltaiczne dla domów jednorodzinnych i firm. Wydajne panele, profesjonalny montaż i optymalizacja uzysku energii.</p>
+          </div>
+
+          <div class="service-card reveal reveal--delay-1">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3 class="service-card__title">Farmy Fotowoltaiczne</h3>
+            <p class="service-card__desc">Projektowanie i wykonawstwo wielkoskalowych farm słonecznych. Inwestycja w przyszłość energetyki – od projektu po przyłączenie do sieci.</p>
+          </div>
+
+          <div class="service-card reveal reveal--delay-2">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <h3 class="service-card__title">Doradztwo</h3>
+            <p class="service-card__desc">Profesjonalne doradztwo techniczne i pośrednictwo w obrocie energią. Audyt energetyczny i dobór optymalnej instalacji do Twoich potrzeb.</p>
+          </div>
+
+          <div class="service-card reveal reveal--delay-3">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3 class="service-card__title">Finansowanie</h3>
+            <p class="service-card__desc">Pomoc w uzyskaniu Kredytu Ekologicznego i dotacji unijnych. Przeprowadzamy przez cały proces formalny – bezstresowo i skutecznie.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ MÓJ PRĄD ══════════════════════════════════════════ -->
+    <section id="moj-prad" class="section moj-prad" aria-labelledby="moj-prad-title">
+      <div class="container">
+        <div class="moj-prad__inner">
+          <div class="reveal">
+            <p class="section__eyebrow">Dofinansowanie</p>
+            <h2 class="section__title" id="moj-prad-title">Program „Mój Prąd 7.0"</h2>
+            <p class="moj-prad__lead">
+              Nowa edycja najpopularniejszego programu dofinansowań do fotowoltaiki w Polsce.
+              Bądź gotowy i skorzystaj z maksymalnego dofinansowania.
+            </p>
+            <div class="moj-prad__highlight" role="note">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <p>Start przewidywany na I kwartał 2026 roku!</p>
+            </div>
+            <a href="#kontakt" class="btn btn--accent">Zapytaj o szczegóły</a>
+          </div>
+          <div class="moj-prad__card reveal reveal--delay-1">
+            <h3>Co nowego w edycji 7.0?</h3>
+            <ul class="moj-prad__list" role="list">
+              <li class="moj-prad__list-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                  <strong>Magazyny Energii</strong>
+                  <span>Olbrzymi nacisk na magazynowanie. Dofinansowanie prawdopodobnie uwarunkowane posiadaniem magazynu.</span>
+                </div>
+              </li>
+              <li class="moj-prad__list-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                  <strong>Dla kogo?</strong>
+                  <span>Program skierowany do prosumentów rozliczających się w systemie net-billing.</span>
+                </div>
+              </li>
+              <li class="moj-prad__list-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                  <strong>Cel programu</strong>
+                  <span>Zwiększenie autokonsumpcji i stabilizacja sieci energetycznej w Polsce.</span>
+                </div>
+              </li>
+              <li class="moj-prad__list-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                  <strong>Jak się przygotować?</strong>
+                  <span>Skontaktuj się z nami już teraz, aby przygotować instalację pod wymogi programu.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROJEKTY ══════════════════════════════════════════ -->
+    <section id="projekty" class="section projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section__header text-center">
+          <p class="section__eyebrow">Portfolio</p>
+          <h2 class="section__title" id="projects-title">Nasze Realizacje</h2>
+          <p class="section__subtitle">Wybrane projekty z naszego doświadczenia w całej Polsce.</p>
+        </div>
+        <div class="projects__grid">
+          <div class="project-item project-item--home reveal">
+            <div class="project-item__image" role="img" aria-label="Instalacja domowa 10kWp w Zduńskiej Woli"></div>
+            <div class="project-item__overlay" aria-hidden="true"></div>
+            <div class="project-item__info">
+              <span class="project-item__tag">Dom jednorodzinny</span>
+              <h3>Instalacja Domowa 10&nbsp;kWp</h3>
+              <p>Zduńska Wola</p>
+            </div>
+          </div>
+          <div class="project-item project-item--farm reveal reveal--delay-1">
+            <div class="project-item__image" role="img" aria-label="Farma fotowoltaiczna 1MW w okolicach Łodzi"></div>
+            <div class="project-item__overlay" aria-hidden="true"></div>
+            <div class="project-item__info">
+              <span class="project-item__tag">Farma PV</span>
+              <h3>Farma Fotowoltaiczna 1&nbsp;MW</h3>
+              <p>Okolice Łodzi</p>
+            </div>
+          </div>
+          <div class="project-item project-item--business reveal reveal--delay-2">
+            <div class="project-item__image" role="img" aria-label="Instalacja dla firmy 50kWp w Sieradzu"></div>
+            <div class="project-item__overlay" aria-hidden="true"></div>
+            <div class="project-item__info">
+              <span class="project-item__tag">Obiekt komercyjny</span>
+              <h3>Instalacja dla Firmy 50&nbsp;kWp</h3>
+              <p>Sieradz</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PRACA ══════════════════════════════════════════════ -->
+    <section id="praca" class="section careers" aria-labelledby="careers-title">
+      <div class="container">
+        <p class="section__eyebrow reveal">Dołącz do nas</p>
+        <h2 class="section__title reveal reveal--delay-1" id="careers-title">Zbuduj z nami zieloną przyszłość</h2>
+        <p class="careers__desc reveal reveal--delay-2">
+          Szukamy pasjonatów energii odnawialnej. Jeśli chcesz rozwijać się w dynamicznej
+          branży i mieć realny wpływ na transformację energetyczną Polski – wyślij do nas CV.
+        </p>
+        <a href="mailto:rekrutacja@kapitello.pl" class="btn btn--ghost reveal reveal--delay-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Aplikuj teraz
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══ KONTAKT ════════════════════════════════════════════ -->
+    <section id="kontakt" class="section contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section__header text-center">
+          <p class="section__eyebrow">Kontakt</p>
+          <h2 class="section__title" id="contact-title">Porozmawiajmy o Twoim projekcie</h2>
+          <p class="section__subtitle">Bezpłatna wycena i konsultacja – skontaktuj się z nami już dziś.</p>
+        </div>
+        <div class="contact__wrapper">
+
+          <!-- Dane kontaktowe -->
+          <div class="contact__info reveal">
+            <h3>Kapitello Sp. z o.o.</h3>
+            <p>Znajdziesz nas w Zduńskiej Woli. Zapraszamy do kontaktu telefonicznego, mailowego lub bezpośredniego.</p>
+
+            <div class="contact__detail">
+              <div class="contact__detail-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="contact__detail-body">
+                <strong>Adres</strong>
+                <span>ul. Jasna 35/l. 4, 98-220 Zduńska Wola</span>
+              </div>
+            </div>
+            <div class="contact__detail">
+              <div class="contact__detail-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.17 6.17l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div class="contact__detail-body">
+                <strong>Telefon</strong>
+                <a href="tel:+48000000000">+48 000 000 000</a>
+              </div>
+            </div>
+            <div class="contact__detail">
+              <div class="contact__detail-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="contact__detail-body">
+                <strong>E-mail</strong>
+                <a href="mailto:biuro@kapitello.pl">biuro@kapitello.pl</a>
+              </div>
+            </div>
+
+            <div class="contact__map">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.546338870912!2d18.9388!3d51.6045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDM2JzE2LjIiTiAxOMKwNTYnMzAuMCJF!5e0!3m2!1spl!2spl!4v1600000000000!5m2!1spl!2spl"
+                title="Lokalizacja Kapitello w Zduńskiej Woli"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+
+          <!-- Formularz -->
+          <div class="contact__form-wrap reveal reveal--delay-1">
+            <h3>Bezpłatna wycena</h3>
+            <p>Wypełnij formularz, a odezwiemy się w ciągu 24 godzin.</p>
+            <form id="contact-form" novalidate>
+              <div class="form__grid">
+                <div class="form__group">
+                  <label for="name">Imię i nazwisko <span aria-hidden="true">*</span></label>
+                  <input type="text" id="name" name="name" autocomplete="name" placeholder="Jan Kowalski" required>
+                </div>
+                <div class="form__group">
+                  <label for="phone">Telefon <span aria-hidden="true">*</span></label>
+                  <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+48 000 000 000" required>
+                </div>
+              </div>
+              <div class="form__group">
+                <label for="email">Adres e-mail <span aria-hidden="true">*</span></label>
+                <input type="email" id="email" name="email" autocomplete="email" placeholder="jan@przyklad.pl" required>
+              </div>
+              <div class="form__group">
+                <label for="service">Rodzaj usługi</label>
+                <select id="service" name="service">
+                  <option value="">Wybierz usługę...</option>
+                  <option value="pv-home">Instalacja domowa (PV)</option>
+                  <option value="pv-business">Instalacja biznesowa (PV)</option>
+                  <option value="farm">Farma fotowoltaiczna</option>
+                  <option value="financing">Doradztwo i finansowanie</option>
+                  <option value="moj-prad">Program Mój Prąd 7.0</option>
+                </select>
+              </div>
+              <div class="form__group">
+                <label for="message">Wiadomość</label>
+                <textarea id="message" name="message" placeholder="Opisz krótko swój projekt lub zapytanie..."></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary form__submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                Wyślij zapytanie
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="#" class="footer__logo" aria-label="Kapitello – strona główna">
+            <img src="assets/kapitello_logo.png" alt="Kapitello">
+          </a>
+          <p>Twój partner w energii odnawialnej. Instalacje PV, farmy słoneczne i finansowanie ekologiczne w Zduńskiej Woli.</p>
+        </div>
+        <div class="footer__links">
+          <div class="footer__col">
+            <h4>Oferta</h4>
+            <ul>
+              <li><a href="#oferta">Instalacje PV</a></li>
+              <li><a href="#oferta">Farmy Fotowoltaiczne</a></li>
+              <li><a href="#oferta">Doradztwo</a></li>
+              <li><a href="#oferta">Finansowanie</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4>Firma</h4>
+            <ul>
+              <li><a href="#o-nas">O nas</a></li>
+              <li><a href="#moj-prad">Mój Prąd 7.0</a></li>
+              <li><a href="#projekty">Realizacje</a></li>
+              <li><a href="#praca">Praca</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4>Kontakt</h4>
+            <ul>
+              <li><a href="tel:+48000000000">+48 000 000 000</a></li>
+              <li><a href="mailto:biuro@kapitello.pl">biuro@kapitello.pl</a></li>
+              <li><a href="mailto:rekrutacja@kapitello.pl">rekrutacja@kapitello.pl</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2025 Kapitello Sp. z o.o. Wszelkie prawa zastrzeżone.</p>
+        <p>ul. Jasna 35/l. 4, 98-220 Zduńska Wola</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
