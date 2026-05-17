@@ -1,14 +1,15 @@
+'use strict';
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // ── Sticky header ──────────────────────────────────────
   const header = document.getElementById('header');
-  const onScroll = () => {
+  window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 20);
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
+  }, { passive: true });
 
-  // ── Hero background zoom on load ───────────────────────
-  document.querySelector('.hero')?.classList.add('loaded');
+  // ── Hero hex canvas ────────────────────────────────────
+  initHeroCanvas();
 
   // ── Mobile menu ────────────────────────────────────────
   const toggle = document.querySelector('.menu-toggle');
@@ -30,9 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Close menu on outside click
   document.addEventListener('click', e => {
-    if (nav.classList.contains('active') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+    if (nav.classList.contains('active') && !nav.contains(e.target) && !toggle?.contains(e.target)) {
       nav.classList.remove('active');
       toggle?.classList.remove('active');
       toggle?.setAttribute('aria-expanded', 'false');
@@ -41,42 +41,41 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ── Scroll reveal ──────────────────────────────────────
-  const reveals = document.querySelectorAll('.reveal');
   const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); } });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => revealObs.observe(el));
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('active');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
   // ── Counter animation ──────────────────────────────────
-  const counters = document.querySelectorAll('.stat-item__number[data-target]');
-
-  const animateCounter = (el) => {
-    const target = +el.dataset.target;
-    const suffix = el.dataset.suffix || '';
-    const duration = 1600;
-    const start = performance.now();
-
-    const step = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-      const value = Math.floor(ease * target);
-      el.textContent = value + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
-
   const counterObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        animateCounter(e.target);
-        counterObs.unobserve(e.target);
-      }
+      if (!e.isIntersecting) return;
+      animateCounter(e.target);
+      counterObs.unobserve(e.target);
     });
   }, { threshold: 0.5 });
-  counters.forEach(el => counterObs.observe(el));
 
-  // ── Smooth scroll with header offset ──────────────────
+  document.querySelectorAll('.stat-item__number[data-target]').forEach(el => counterObs.observe(el));
+
+  function animateCounter(el) {
+    const target   = +el.dataset.target;
+    const suffix   = el.dataset.suffix || '';
+    const duration = 1600;
+    const start    = performance.now();
+
+    (function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease     = 1 - Math.pow(1 - progress, 3);
+      const value    = Math.round(ease * target);
+      el.textContent = value + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    })(start);
+  }
+
+  // ── Smooth scroll ──────────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
       const id = anchor.getAttribute('href');
@@ -85,35 +84,38 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!target) return;
       e.preventDefault();
       const offset = header.offsetHeight + 16;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      const top    = target.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
     });
   });
 
-  // ── Contact form (basic feedback) ─────────────────────
+  // ── Contact form ───────────────────────────────────────
   const form = document.getElementById('contact-form');
   form?.addEventListener('submit', e => {
     e.preventDefault();
-    const btn = form.querySelector('.form__submit');
+    const btn      = form.querySelector('.form__submit');
     const original = btn.innerHTML;
 
-    btn.disabled = true;
-    btn.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="animation:spin .8s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
-      Wysyłanie...
-    `;
+    btn.disabled   = true;
+    btn.innerHTML  = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true" style="animation:spin .8s linear infinite">
+        <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+      </svg>
+      Wysyłanie...`;
 
-    // Simulate send — replace with real fetch() to backend
     setTimeout(() => {
       btn.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        Wiadomość wysłana!
-      `;
-      btn.style.background = '#047857';
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+          aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        Wiadomość wysłana!`;
+      btn.style.background = 'var(--primary)';
       form.reset();
       setTimeout(() => {
-        btn.disabled = false;
-        btn.innerHTML = original;
+        btn.disabled         = false;
+        btn.innerHTML        = original;
         btn.style.background = '';
       }, 4000);
     }, 1200);
@@ -121,7 +123,115 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// ── Spinner keyframe (injected once) ──────────────────────
-const style = document.createElement('style');
-style.textContent = `@keyframes spin { to { transform: rotate(360deg); } }`;
-document.head.appendChild(style);
+// ── Spinner keyframe ───────────────────────────────────────
+const _spinStyle = document.createElement('style');
+_spinStyle.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+document.head.appendChild(_spinStyle);
+
+// ── Hero hex canvas ────────────────────────────────────────
+function initHeroCanvas() {
+  const heroBg = document.querySelector('.hero__bg');
+  if (!heroBg) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.setAttribute('aria-hidden', 'true');
+  canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;';
+  heroBg.appendChild(canvas);
+
+  const ctx   = canvas.getContext('2d');
+  const EASE  = 'cubic-bezier(0.16,1,0.3,1)';
+  let W, H, hexes = [], particles = [];
+
+  function resize() {
+    W = canvas.width  = heroBg.offsetWidth;
+    H = canvas.height = heroBg.offsetHeight;
+    buildHexes();
+  }
+
+  function buildHexes() {
+    hexes = [];
+    const size = 34;
+    const colW = size * Math.sqrt(3);
+    const rowH = size * 1.5;
+    const cols = Math.ceil(W / colW) + 2;
+    const rows = Math.ceil(H / rowH) + 2;
+
+    for (let r = -1; r < rows; r++) {
+      for (let c = -1; c < cols; c++) {
+        hexes.push({
+          x: c * colW + (r % 2 ? colW / 2 : 0),
+          y: r * rowH,
+          s: size,
+          o: Math.random() * 0.05 + 0.01,
+        });
+      }
+    }
+  }
+
+  function hexPath(x, y, s) {
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const a  = (Math.PI / 3) * i - Math.PI / 6;
+      const px = x + s * Math.cos(a);
+      const py = y + s * Math.sin(a);
+      i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+  }
+
+  function spawnParticle() {
+    if (particles.length >= 50) return;
+    particles.push({
+      x:     Math.random() * W,
+      y:     H + 8,
+      vx:    (Math.random() - 0.5) * 0.35,
+      vy:    -(Math.random() * 0.55 + 0.25),
+      life:  1,
+      decay: Math.random() * 0.003 + 0.0012,
+      r:     Math.random() * 2 + 1,
+      gold:  Math.random() > 0.45,
+    });
+  }
+
+  let frame = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Hex grid
+    ctx.lineWidth = 0.5;
+    hexes.forEach(h => {
+      hexPath(h.x, h.y, h.s - 1);
+      ctx.strokeStyle = `rgba(255,255,255,${h.o})`;
+      ctx.stroke();
+    });
+
+    // Particles
+    if (frame % 10 === 0) spawnParticle();
+    particles = particles.filter(p => p.life > 0);
+    particles.forEach(p => {
+      p.x    += p.vx;
+      p.y    += p.vy;
+      p.life -= p.decay;
+      const a   = p.life * 0.65;
+      const col = p.gold
+        ? `rgba(245,158,11,${a})`
+        : `rgba(16,185,129,${a})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle   = col;
+      ctx.shadowBlur  = 8;
+      ctx.shadowColor = col;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    });
+
+    frame++;
+    requestAnimationFrame(draw);
+  }
+
+  const ro = new ResizeObserver(resize);
+  ro.observe(heroBg);
+  resize();
+  draw();
+}
