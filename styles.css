@@ -973,6 +973,7 @@ body::before {
 .form__group textarea,
 .form__group select {
   padding: 12px 16px;
+  min-height: 44px;
   border: 1.5px solid var(--border-s);
   border-radius: var(--r-md);
   font-family: var(--font-body);
@@ -1253,4 +1254,20 @@ body::before {
   .footer__top    { flex-direction: row; gap: var(--sp-8); }
   .footer__links  { flex-direction: row; gap: var(--sp-12); }
   .footer__bottom { flex-direction: row; text-align: left; }
+}
+
+/* ── Cele dotykowe na telefonie ──────────────────────────────
+   WCAG 2.5.5 i wytyczne Google: klikalny obszar min. 44×44 px.
+   Linki w stopce i w danych kontaktowych miały 17–18 px wysokości. */
+@media (max-width: 767px) {
+  .footer__col ul a,
+  .contact__detail-body a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .menu-toggle {
+    min-width: 44px;
+    min-height: 44px;
+  }
 }

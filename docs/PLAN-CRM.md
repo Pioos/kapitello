@@ -171,6 +171,26 @@ Endpoint eksportu JSON (backup), krótka instrukcja dla klienta po polsku, zmien
 
 Konta wielu użytkowników · role i uprawnienia · wersjonowanie treści · komentarze · newsletter · statystyki · pełny edytor WYSIWYG · generowanie statycznych podstron aktualności · i18n.
 
+## 9a. ⚠️ RYZYKO KRYTYCZNE — docelowy hosting to home.pl
+
+**Ustalenie z 11.08.2026:** strona ma docelowo stać na hostingu **home.pl**, gdzie klient ma już serwer. Przepięcie po sygnale od Piotra.
+
+**To podważa fundament tego planu.** Cały stack z punktu 3 (Netlify Functions + Netlify Blobs) działa wyłącznie na Netlify. Na typowym współdzielonym hostingu home.pl jest PHP i MySQL, nie ma środowiska serverless ani Blobs. Przeniesienie plików przez FTP przeniesie stronę statyczną, ale **backend przestanie istnieć**.
+
+**Do rozstrzygnięcia PRZED etapem M1** (nie zaczynać M1, dopóki nie ma decyzji):
+
+| Wariant | Na czym stoi | Konsekwencje |
+|---|---|---|
+| **A. Domena na home.pl, strona i backend na Netlify** | rekordy DNS w panelu home.pl kierują na Netlify | plan zostaje bez zmian; klient płaci za hosting, którego nie używa pod tę stronę |
+| **B. Wszystko na home.pl, backend w PHP + MySQL** | LAMP zamiast serverless | **plan do przepisania**: inne API, inne przechowywanie plików, inna autoryzacja (sesje PHP), inny model wdrożenia (FTP zamiast git). Etapy M1–M6 tracą aktualność |
+| **C. Strona statyczna na home.pl, samo API na Netlify** | rozdzielenie warstw | wymaga CORS i osobnej domeny/subdomeny dla API; dwa miejsca do utrzymania |
+
+**Rekomendacja: wariant A.** Netlify daje darmowy hosting statyczny z CDN, HTTPS, deploy z gita i funkcje serverless w jednym. Home.pl zostaje przy rejestracji domeny i poczcie. Jedyny koszt to zmiana rekordów DNS.
+
+**Jeśli klient uprze się przy trzymaniu wszystkiego na swoim serwerze — wariant B i przepisanie planu od punktu 3.** Trzeba wtedy najpierw sprawdzić w panelu home.pl: wersję PHP, dostęp do MySQL, limit uploadu (`upload_max_filesize`), dostępność `mod_rewrite` i czy jest SSH/cron.
+
+**Do sprawdzenia niezależnie od wariantu:** czy pakiet klienta w home.pl obsługuje Node.js (część planów tak, część nie) — to zmienia dostępne opcje.
+
 ## 10. Zasady dla wykonawcy
 
 1. **Zero build stepu na froncie.** Bez Reacta, bez Vite, bez Tailwinda. Panel to HTML + CSS + moduły ES.
