@@ -202,7 +202,7 @@ function initHeroCanvas() {
     ctx.lineWidth = 0.5;
     hexes.forEach(h => {
       hexPath(h.x, h.y, h.s - 1);
-      ctx.strokeStyle = `rgba(255,255,255,${h.o})`;
+      ctx.strokeStyle = `rgba(233,214,174,${h.o})`;
       ctx.stroke();
     });
 
@@ -215,8 +215,8 @@ function initHeroCanvas() {
       p.life -= p.decay;
       const a   = p.life * 0.65;
       const col = p.gold
-        ? `rgba(245,158,11,${a})`
-        : `rgba(16,185,129,${a})`;
+        ? `rgba(232,213,168,${a})`
+        : `rgba(201,164,92,${a})`;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fillStyle   = col;

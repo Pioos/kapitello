@@ -1,0 +1,22 @@
+# Oryginały zdjęć od klienta (duże pliki z WhatsAppa) – w repo trzymamy
+# tylko zoptymalizowane wersje w assets/realizacja-*.jpg
+assets/zdjecia/
+
+# Narzędzia i stan lokalny
+.netlify/
+.vscode/
+.claude/settings.local.json
+
+# Sekrety (na potrzeby przyszłego backendu/CRM)
+.env
+.env.*
+!.env.example
+
+# Śmieci systemowe i pliki blokad Office
+~$*
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Node (backend/CRM)
+node_modules/

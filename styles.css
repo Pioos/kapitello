@@ -1,7 +1,8 @@
 /* ═══════════════════════════════════════════════════════════
-   Kapitello — Dark Precision
-   Styl: Cypherpunk Precision zaadaptowany dla OZE/fotowoltaika
-   Palette: Fintech dark + zielony akcent (energia)
+   Kapitello — Dark Gold
+   Styl: ciemna precyzja w tonacji marki (brąz + złoto)
+   Palette: wyciągnięta z assets/kapitello_background.jpg i logo
+            złoto #C9A45C · szampan #E8D5A8 · brąz #241B0F · tło #080603
    Fonts: Space Grotesk (display) + Inter (body)
    ═══════════════════════════════════════════════════════════ */
 
@@ -11,33 +12,33 @@
 /* ── Variables ───────────────────────────────────────────── */
 :root {
   /* Backgrounds */
-  --bg-deep:      #080D1A;
-  --bg:           #0F172A;
-  --bg-card:      #131B2E;
-  --bg-elevated:  #1A2340;
-  --surface:      rgba(255 255 255 / 0.04);
-  --surface-h:    rgba(255 255 255 / 0.07);
+  --bg-deep:      #080603;
+  --bg:           #100C06;
+  --bg-card:      #191309;
+  --bg-elevated:  #241B0F;
+  --surface:      rgba(233 214 174 / 0.04);
+  --surface-h:    rgba(233 214 174 / 0.07);
 
   /* Brand */
-  --primary:      #10B981;
-  --primary-dark: #059669;
-  --primary-glow: rgba(16 185 129 / 0.2);
-  --primary-muted:rgba(16 185 129 / 0.1);
-  --accent:       #F59E0B;
-  --accent-dark:  #D97706;
-  --accent-muted: rgba(245 158 11 / 0.12);
-  --accent-glow:  rgba(245 158 11 / 0.22);
-  --purple:       #8B5CF6;
-  --purple-muted: rgba(139 92 246 / 0.12);
+  --primary:      #C9A45C;
+  --primary-dark: #A07C34;
+  --primary-glow: rgba(201 164 92 / 0.2);
+  --primary-muted:rgba(201 164 92 / 0.1);
+  --accent:       #E8D5A8;
+  --accent-dark:  #B08840;
+  --accent-muted: rgba(232 213 168 / 0.12);
+  --accent-glow:  rgba(232 213 168 / 0.22);
+  --purple:       #8A6A3A;
+  --purple-muted: rgba(138 106 58 / 0.12);
 
   /* Borders */
-  --border:       rgba(255 255 255 / 0.07);
-  --border-s:     rgba(255 255 255 / 0.13);
+  --border:       rgba(233 214 174 / 0.07);
+  --border-s:     rgba(233 214 174 / 0.13);
 
   /* Text */
-  --text:         #F8FAFC;
-  --text-muted:   #94A3B8;
-  --text-faint:   #475569;
+  --text:         #F6F1E7;
+  --text-muted:   #A99A80;
+  --text-faint:   #5B4F3B;
 
   /* Typography */
   --font-display: 'Space Grotesk', sans-serif;
@@ -130,7 +131,7 @@ body::before {
   color: var(--bg-deep);
 }
 .btn--primary:hover {
-  background: #34D399;
+  background: #E3C88E;
   transform: translateY(-2px);
   box-shadow: 0 8px 24px var(--primary-glow);
 }
@@ -140,7 +141,7 @@ body::before {
   color: var(--bg-deep);
 }
 .btn--accent:hover {
-  background: #FBBF24;
+  background: #E3C88E;
   transform: translateY(-2px);
   box-shadow: 0 8px 24px var(--accent-glow);
 }
@@ -177,7 +178,7 @@ body::before {
   border-radius: 50px;
 }
 .btn--nav:hover {
-  background: #34D399;
+  background: #E3C88E;
   transform: translateY(-1px);
 }
 
@@ -189,14 +190,14 @@ body::before {
   right: var(--sp-4);
   z-index: var(--z-nav);
   border-radius: var(--r-lg);
-  background: rgba(8 13 26 / 0.78);
+  background: rgba(8 6 3 / 0.78);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border);
   transition: background 300ms, border-color 300ms, box-shadow 300ms;
 }
 .header.scrolled {
-  background: rgba(8 13 26 / 0.95);
+  background: rgba(8 6 3 / 0.95);
   border-color: var(--border-s);
   box-shadow: 0 8px 32px rgba(0 0 0 / 0.4);
 }
@@ -210,11 +211,10 @@ body::before {
 }
 
 .logo img {
-  height: 109px;
+  height: 48px;
   width: auto;
-  /* Konwersja logo do wersji jasnej/białej na ciemnym tle */
-  filter: brightness(0) invert(1);
-  opacity: 0.9;
+  /* Logo jest już złote z przezroczystym tłem – bez filtrów */
+  opacity: 0.95;
   transition: opacity 200ms;
 }
 .logo:hover img { opacity: 1; }
@@ -300,8 +300,8 @@ body::before {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 10% 30%, rgba(16 185 129 / 0.12) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 60% at 90% 70%, rgba(245 158 11 / 0.08) 0%, transparent 70%);
+    radial-gradient(ellipse 60% 50% at 10% 30%, rgba(201 164 92 / 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 90% 70%, rgba(232 213 168 / 0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -310,9 +310,9 @@ body::before {
   inset: 0;
   background: linear-gradient(
     160deg,
-    rgba(8 13 26 / 0.6) 0%,
-    rgba(8 13 26 / 0.2) 50%,
-    rgba(8 13 26 / 0.7) 100%
+    rgba(8 6 3 / 0.6) 0%,
+    rgba(8 6 3 / 0.2) 50%,
+    rgba(8 6 3 / 0.7) 100%
   );
   z-index: 1;
 }
@@ -330,8 +330,8 @@ body::before {
   align-items: center;
   gap: var(--sp-2);
   background: var(--accent-muted);
-  border: 1px solid rgba(245 158 11 / 0.3);
-  color: #FCD34D;
+  border: 1px solid rgba(232 213 168 / 0.3);
+  color: #F0E2BC;
   padding: 6px 16px;
   border-radius: 999px;
   font-size: 0.78rem;
@@ -350,7 +350,7 @@ body::before {
   letter-spacing: -0.025em;
 }
 .hero__title span {
-  background: linear-gradient(135deg, var(--primary) 0%, #34D399 50%, var(--accent) 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #E3C88E 50%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -558,7 +558,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, var(--primary), #34D399);
+  background: linear-gradient(90deg, var(--primary), #E3C88E);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.35s var(--ease);
@@ -618,7 +618,7 @@ body::before {
   right: -150px;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(16 185 129 / 0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(201 164 92 / 0.07) 0%, transparent 70%);
   pointer-events: none;
 }
 .moj-prad::after {
@@ -628,7 +628,7 @@ body::before {
   left: -100px;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(245 158 11 / 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(232 213 168 / 0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -655,13 +655,13 @@ body::before {
   align-items: center;
   gap: var(--sp-3);
   background: var(--accent-muted);
-  border: 1px solid rgba(245 158 11 / 0.25);
+  border: 1px solid rgba(232 213 168 / 0.25);
   border-radius: var(--r-lg);
   padding: var(--sp-4) 20px;
   margin-bottom: var(--sp-8);
 }
 .moj-prad__highlight svg { color: var(--accent); flex-shrink: 0; }
-.moj-prad__highlight p { font-weight: 700; color: #FCD34D; font-size: 0.95rem; }
+.moj-prad__highlight p { font-weight: 700; color: #F0E2BC; font-size: 0.95rem; }
 
 .moj-prad__card {
   background: var(--bg-card);
@@ -671,11 +671,25 @@ body::before {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
+.moj-prad__card-lead {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: var(--sp-6);
+}
+.moj-prad__card-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border);
+}
 .moj-prad__card h3 {
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom: var(--sp-6);
+  margin-bottom: var(--sp-4);
   color: var(--text);
 }
 
@@ -717,7 +731,7 @@ body::before {
 
 .projects__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--sp-6);
 }
 .project-item {
@@ -738,19 +752,20 @@ body::before {
   background-position: center;
   transition: transform 0.5s var(--ease);
 }
-.project-item--home     .project-item__image { background-image: url('assets/fotowoltaika.png'); }
-.project-item--farm     .project-item__image { background-image: url('assets/farma.png'); }
-.project-item--business .project-item__image { background-image: url('assets/fotowoltaika.png'); }
+.project-item--home     .project-item__image { background-image: url('assets/realizacja-dach.jpg'); }
+.project-item--farm     .project-item__image { background-image: url('assets/realizacja-grunt.jpg'); }
+.project-item--storage  .project-item__image { background-image: url('assets/realizacja-magazyn.jpg'); }
+.project-item--business .project-item__image { background-image: url('assets/realizacja-dach2.jpg'); }
 .project-item:hover .project-item__image { transform: scale(1.06); }
 
 .project-item__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(8 13 26 / 0.92) 0%, rgba(8 13 26 / 0.15) 60%, transparent 100%);
+  background: linear-gradient(to top, rgba(8 6 3 / 0.92) 0%, rgba(8 6 3 / 0.15) 60%, transparent 100%);
   transition: var(--tr);
 }
 .project-item:hover .project-item__overlay {
-  background: linear-gradient(to top, rgba(8 13 26 / 0.96) 0%, rgba(16 185 129 / 0.2) 60%, transparent 100%);
+  background: linear-gradient(to top, rgba(8 6 3 / 0.96) 0%, rgba(201 164 92 / 0.2) 60%, transparent 100%);
 }
 
 .project-item__info {
@@ -808,7 +823,7 @@ body::before {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(16 185 129 / 0.08) 0%, transparent 70%);
+    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201 164 92 / 0.08) 0%, transparent 70%);
   z-index: 1;
   pointer-events: none;
 }
@@ -984,7 +999,10 @@ body::before {
 
 /* ── Footer ──────────────────────────────────────────────── */
 .footer {
-  background: var(--bg-deep);
+  position: relative;
+  background:
+    linear-gradient(to bottom, rgba(8 6 3 / 0.97) 0%, rgba(8 6 3 / 0.99) 100%),
+    url('assets/kapitello_background.jpg') center / cover no-repeat;
   border-top: 1px solid var(--border);
   padding: var(--sp-12) 0 var(--sp-8);
 }
@@ -1007,10 +1025,9 @@ body::before {
   margin-top: var(--sp-3);
 }
 .footer__logo img {
-  height: 116px;
+  height: 64px;
   width: auto;
-  filter: brightness(0) invert(1);
-  opacity: 0.7;
+  opacity: 0.85;
   transition: opacity 200ms;
 }
 .footer__logo:hover img { opacity: 0.9; }
@@ -1218,8 +1235,8 @@ body::before {
 
   .about__content  { grid-template-columns: 1fr 1fr; gap: var(--sp-16); }
   .moj-prad__inner { grid-template-columns: 1fr 1fr; gap: var(--sp-16); }
-  .projects__grid  { grid-template-columns: repeat(3, 1fr); }
-  .project-item    { height: 320px; }
+  .projects__grid  { grid-template-columns: repeat(2, 1fr); }
+  .project-item    { height: 360px; }
   .services__grid  { grid-template-columns: repeat(4, 1fr); }
 
   .footer__top    { flex-direction: row; gap: var(--sp-8); }
