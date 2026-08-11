@@ -6,6 +6,12 @@ assets/zdjecia/
 .netlify/
 .vscode/
 .claude/settings.local.json
+# generowane przez `netlify dev` (runtime Deno dla Edge Functions)
+deno.lock
+
+# Dokumenty robocze klienta – zostają lokalnie, repo jest publiczne
+docs/*.xlsx
+docs/*.docx
 
 # Sekrety (na potrzeby przyszłego backendu/CRM)
 .env

@@ -1,0 +1,10 @@
+{
+  "name": "kapitello",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Strona Kapitello + funkcje Netlify (backend/CRM). Front bez build stepu.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  }
+}

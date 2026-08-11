@@ -1052,11 +1052,22 @@ body::before {
 
 .footer__bottom {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: var(--sp-2) var(--sp-6);
   font-size: 0.8125rem;
   color: var(--text-faint);
 }
+
+/* Podpis autorski — docelowo zamieni się w link do strony Nonino */
+.footer__credit span {
+  color: var(--primary);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.footer__credit a { color: var(--primary); }
+.footer__credit a:hover { color: var(--accent); }
 
 /* ── Reveal animations ────────────────────────────────────── */
 @keyframes fadeInUp {
