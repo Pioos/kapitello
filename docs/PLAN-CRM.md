@@ -191,6 +191,40 @@ Konta wielu użytkowników · role i uprawnienia · wersjonowanie treści · kom
 
 **Do sprawdzenia niezależnie od wariantu:** czy pakiet klienta w home.pl obsługuje Node.js (część planów tak, część nie) — to zmienia dostępne opcje.
 
+### Rozpoznanie stanu faktycznego (11.08.2026)
+
+```
+kapitello.pl      → A 46.242.239.188 (home.pl), Server: Apache
+www.kapitello.pl  → CNAME kapitello.pl
+Treść             → WordPress z wtyczką „UnderConstructionPage" (strona w budowie)
+MX                → preference 10, mail exchanger = kapitello.pl   ⚠️
+```
+
+**Wniosek 1 — na home.pl stoi WordPress.** To otwiera czwarty wariant: przerobić stronę na motyw WordPressa i wykorzystać wbudowany panel zamiast pisać własny CRM. Odrzucony — uzasadnienie w sekcji 9b.
+
+**Wniosek 2 — ⚠️ MX WSKAZUJE NA GOŁĄ DOMENĘ.** Rekord pocztowy prowadzi do `kapitello.pl`, czyli podąża za rekordem A. **Zmiana A na Netlify skieruje pocztę na serwery Netlify, które nie obsługują SMTP — maile do `biuro@kapitello.pl` przestaną przychodzić i będą bezpowrotnie tracone.**
+
+**Kolejność przepięcia jest nienegocjowalna:**
+
+1. Najpierw w panelu home.pl zmienić MX z `kapitello.pl` na właściwy host pocztowy home.pl (zwykle `mail.home.pl` — do potwierdzenia w panelu klienta).
+2. Odczekać na propagację i **zweryfikować wysyłkę oraz odbiór testowego maila**.
+3. Dopiero wtedy zmienić rekord A / CNAME na Netlify.
+4. Skopiować przy okazji rekordy SPF, DKIM i DMARC, jeśli istnieją.
+
+Pominięcie kroku 1 oznacza utratę korespondencji firmowej. To najpoważniejsze ryzyko całego wdrożenia — poważniejsze niż cokolwiek w kodzie.
+
+## 9b. Dlaczego nie WordPress (skoro już tam stoi)
+
+| Kryterium | WordPress na home.pl | Statyczna strona + własny panel |
+|---|---|---|
+| Panel do treści | gotowy, zero pracy | do napisania (M1–M5) |
+| Wydajność / Core Web Vitals | WP + PHP na współdzielonym hostingu = wolniej | pliki statyczne z CDN, bardzo szybko |
+| Utrzymanie | aktualizacje rdzenia i wtyczek, kopie zapasowe, podatności | brak powierzchni ataku poza własnym API |
+| Koszt SEO | wolniejsza strona utrudnia sprzedawaną usługę pozycjonowania | szybkość jest argumentem sprzedażowym |
+| Obecny design | do przepisania na motyw PHP | zostaje bez zmian |
+
+Decydujące: sprzedajemy klientowi pozycjonowanie. Stawianie strony na wolniejszym stosie, żeby zaoszczędzić kilka dni pracy nad panelem, podcina usługę, którą chcemy sprzedać. **Wariant A przyjęty.**
+
 ## 10. Zasady dla wykonawcy
 
 1. **Zero build stepu na froncie.** Bez Reacta, bez Vite, bez Tailwinda. Panel to HTML + CSS + moduły ES.
