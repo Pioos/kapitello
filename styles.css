@@ -34,6 +34,8 @@
   /* Borders */
   --border:       rgba(233 214 174 / 0.07);
   --border-s:     rgba(233 214 174 / 0.13);
+  --gold-border:  rgba(201 164 92 / 0.30);
+  --gold-border-s:rgba(201 164 92 / 0.60);
 
   /* Text */
   --text:         #F6F1E7;
@@ -542,7 +544,7 @@ body::before {
   background: var(--bg-card);
   padding: 36px 28px;
   border-radius: var(--r-xl);
-  border: 1px solid var(--border);
+  border: 1px solid var(--gold-border);
   transition: border-color 200ms, transform 200ms var(--ease), box-shadow 200ms;
   display: flex;
   flex-direction: column;
@@ -565,7 +567,7 @@ body::before {
 }
 
 .service-card:hover {
-  border-color: var(--border-s);
+  border-color: var(--gold-border-s);
   transform: translateY(-6px);
   box-shadow: 0 20px 48px rgba(0 0 0 / 0.35);
 }
@@ -610,6 +612,45 @@ body::before {
   position: relative;
   overflow: hidden;
 }
+
+/* ── Kafelki dotacji ──────────────────────────────────────── */
+.dotacje__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-4);
+  margin-top: var(--sp-8);
+}
+.dotacje-card {
+  background: var(--bg-card);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--r-lg);
+  padding: 28px 24px;
+  transition: border-color 200ms, transform 200ms var(--ease), box-shadow 200ms;
+}
+.dotacje-card:hover {
+  border-color: var(--gold-border-s);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0 0 0 / 0.35);
+}
+.dotacje-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--sp-2);
+}
+.dotacje-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.dotacje-card--cta {
+  background: var(--primary-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.dotacje-card--cta .btn { margin-top: var(--sp-4); }
 
 .moj-prad::before {
   content: '';
@@ -740,10 +781,10 @@ body::before {
   overflow: hidden;
   height: 320px;
   cursor: pointer;
-  border: 1px solid var(--border);
+  border: 1px solid var(--gold-border);
   transition: border-color 200ms;
 }
-.project-item:hover { border-color: var(--border-s); }
+.project-item:hover { border-color: var(--gold-border-s); }
 
 .project-item__image {
   width: 100%;
@@ -1211,6 +1252,7 @@ body::before {
   .stat-item:last-child { border-right: none; }
 
   .services__grid { grid-template-columns: repeat(2, 1fr); }
+  .dotacje__grid  { grid-template-columns: repeat(2, 1fr); }
   .projects__grid { grid-template-columns: repeat(2, 1fr); }
   .project-item   { height: 300px; }
 
@@ -1250,6 +1292,7 @@ body::before {
   .projects__grid  { grid-template-columns: repeat(2, 1fr); }
   .project-item    { height: 360px; }
   .services__grid  { grid-template-columns: repeat(4, 1fr); }
+  .dotacje__grid   { grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
 
   .footer__top    { flex-direction: row; gap: var(--sp-8); }
   .footer__links  { flex-direction: row; gap: var(--sp-12); }
