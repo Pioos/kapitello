@@ -536,7 +536,7 @@ body::before {
 
 .services__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--sp-6);
 }
 
@@ -772,7 +772,7 @@ body::before {
 
 .projects__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--sp-6);
 }
 .project-item {
@@ -1215,15 +1215,11 @@ body::before {
 .about__content { grid-template-columns: 1fr; gap: var(--sp-8); }
 .about__feature { flex-direction: column; }
 
-/* Services */
-.services__grid { grid-template-columns: 1fr; }
-
 /* Mój Prąd */
 .moj-prad__inner { grid-template-columns: 1fr; gap: var(--sp-8); }
 .moj-prad__card  { padding: 24px; }
 
 /* Projects */
-.projects__grid  { grid-template-columns: 1fr; }
 .project-item    { height: 260px; }
 
 /* Contact */
@@ -1289,7 +1285,6 @@ body::before {
 
   .about__content  { grid-template-columns: 1fr 1fr; gap: var(--sp-16); }
   .moj-prad__inner { grid-template-columns: 1fr 1fr; gap: var(--sp-16); }
-  .projects__grid  { grid-template-columns: repeat(2, 1fr); }
   .project-item    { height: 360px; }
   .services__grid  { grid-template-columns: repeat(4, 1fr); }
   .dotacje__grid   { grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
