@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Hero hex canvas ────────────────────────────────────
   initHeroCanvas();
 
+  // ── Rotująca fraza w nagłówku ──────────────────────────
+  initRotator();
+
   // ── Mobile menu ────────────────────────────────────────
   const toggle = document.querySelector('.menu-toggle');
   const nav    = document.querySelector('.nav');
@@ -127,6 +130,32 @@ document.addEventListener('DOMContentLoaded', () => {
 const _spinStyle = document.createElement('style');
 _spinStyle.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
 document.head.appendChild(_spinStyle);
+
+// ── Rotująca fraza w nagłówku ──────────────────────────────
+// Lekka alternatywa dla slidera: podmienia jedno słowo, reszta
+// nagłówka stoi w miejscu. Frazy są odmienione, bo "Twojego firmy"
+// byłoby błędem — dlatego rotuje cała fraza, nie samo słowo.
+function initRotator() {
+  const el   = document.querySelector('.rotator');
+  const tekst = el?.querySelector('.rotator__text');
+  if (!el || !tekst) return;
+
+  const slowa = (el.dataset.slowa || '').split('|').filter(Boolean);
+  if (slowa.length < 2) return;
+
+  // Szanujemy ustawienie systemowe "ogranicz animacje"
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let i = 0;
+  setInterval(() => {
+    el.classList.add('is-swapping');
+    setTimeout(() => {
+      i = (i + 1) % slowa.length;
+      tekst.textContent = slowa[i];
+      el.classList.remove('is-swapping');
+    }, 240);
+  }, 3200);
+}
 
 // ── Hero hex canvas ────────────────────────────────────────
 function initHeroCanvas() {

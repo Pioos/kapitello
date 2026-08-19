@@ -1376,6 +1376,31 @@ body::before {
   .footer__bottom { flex-direction: row; text-align: left; }
 }
 
+/* ── Rotująca fraza w nagłówku ────────────────────────────
+   Zamiast slidera: zmienia się samo słowo, reszta nagłówka stoi.
+   Brak przeskoków układu, brak dodatkowych zdjęć do pobrania. */
+.rotator {
+  display: inline-grid;
+  vertical-align: top;
+  color: var(--primary);
+}
+/* Obie warstwy w tej samej komórce siatki: niewidoczny "duch" z najdłuższą
+   frazą trzyma stałą szerokość, więc nagłówek nie zmienia liczby linii. */
+.rotator > * { grid-area: 1 / 1; }
+.rotator__ghost { visibility: hidden; }
+.rotator__text {
+  transition: opacity 240ms var(--ease), transform 240ms var(--ease);
+  will-change: opacity, transform;
+}
+.rotator.is-swapping .rotator__text {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .rotator__text { transition: none; }
+  .rotator.is-swapping .rotator__text { opacity: 1; transform: none; }
+}
+
 /* ── Cele dotykowe na telefonie ──────────────────────────────
    WCAG 2.5.5 i wytyczne Google: klikalny obszar min. 44×44 px.
    Linki w stopce i w danych kontaktowych miały 17–18 px wysokości. */
