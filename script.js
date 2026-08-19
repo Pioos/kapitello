@@ -153,14 +153,39 @@ function initRotator() {
     el.style.width = duch.getBoundingClientRect().width + 'px';
   }
 
+  // Najdłuższa fraza zawija nagłówek do dodatkowej linii. Bez rezerwacji
+  // wysokości cała treść pod spodem podskakiwałaby przy każdej zmianie,
+  // dlatego mierzymy H1 dla każdej frazy i blokujemy najwyższy wynik.
+  const naglowek = el.closest('h1');
+
+  function zarezerwujWysokosc() {
+    if (!naglowek) return;
+    const zapamietana = tekst.textContent;
+    // Bez wyłączenia przejścia pomiar łapie szerokość w połowie animacji
+    // i najdłuższa fraza nie zdąży zawinąć wiersza — wysokość wychodzi za mała.
+    el.style.transition = 'none';
+    naglowek.style.minHeight = '';
+    let max = 0;
+    slowa.forEach(fraza => {
+      tekst.textContent = fraza;
+      dopasujSzerokosc(fraza);
+      max = Math.max(max, naglowek.getBoundingClientRect().height);
+    });
+    tekst.textContent = zapamietana;
+    dopasujSzerokosc(zapamietana);
+    naglowek.style.minHeight = Math.ceil(max) + 'px';
+    void el.offsetWidth;          // wymuszenie przeliczenia przed przywróceniem animacji
+    el.style.transition = '';
+  }
+
   // Pomiar musi poczekać na wczytanie kroju, bo szerokość liczy się z fontu.
-  const ustawStart = () => dopasujSzerokosc(slowa[i]);
+  const ustawStart = () => { dopasujSzerokosc(slowa[i]); zarezerwujWysokosc(); };
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(ustawStart);
   } else {
     ustawStart();
   }
-  window.addEventListener('resize', () => dopasujSzerokosc(slowa[i]), { passive: true });
+  window.addEventListener('resize', () => { dopasujSzerokosc(slowa[i]); zarezerwujWysokosc(); }, { passive: true });
 
   // Szanujemy ustawienie systemowe "ogranicz animacje"
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
