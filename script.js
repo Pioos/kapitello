@@ -180,15 +180,15 @@ function initHeroCanvas() {
   }
 
   function spawnParticle() {
-    if (particles.length >= 50) return;
+    if (particles.length >= 70) return;
     particles.push({
       x:     Math.random() * W,
       y:     H + 8,
       vx:    (Math.random() - 0.5) * 0.35,
       vy:    -(Math.random() * 0.55 + 0.25),
       life:  1,
-      decay: Math.random() * 0.003 + 0.0012,
-      r:     Math.random() * 2 + 1,
+      decay: Math.random() * 0.0022 + 0.0009,
+      r:     Math.random() * 2.4 + 1.3,
       gold:  Math.random() > 0.45,
     });
   }
@@ -202,25 +202,25 @@ function initHeroCanvas() {
     ctx.lineWidth = 0.5;
     hexes.forEach(h => {
       hexPath(h.x, h.y, h.s - 1);
-      ctx.strokeStyle = `rgba(233,214,174,${h.o})`;
+      ctx.strokeStyle = `rgba(233,214,174,${h.o * 1.5})`;
       ctx.stroke();
     });
 
     // Particles
-    if (frame % 10 === 0) spawnParticle();
+    if (frame % 7 === 0) spawnParticle();
     particles = particles.filter(p => p.life > 0);
     particles.forEach(p => {
       p.x    += p.vx;
       p.y    += p.vy;
       p.life -= p.decay;
-      const a   = p.life * 0.65;
+      const a   = p.life * 0.95;
       const col = p.gold
-        ? `rgba(232,213,168,${a})`
-        : `rgba(201,164,92,${a})`;
+        ? `rgba(250,240,214,${a})`   // jasny szampan
+        : `rgba(232,213,168,${a})`;  // złoto rozjaśnione
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fillStyle   = col;
-      ctx.shadowBlur  = 8;
+      ctx.shadowBlur  = 16;
       ctx.shadowColor = col;
       ctx.fill();
       ctx.shadowBlur = 0;
@@ -235,3 +235,14 @@ function initHeroCanvas() {
   resize();
   draw();
 }
+
+// ── Realizacje: lokalizacja po dotknięciu (telefon) ─────────
+// Na desktopie wystarczy :hover z CSS. Na telefonie hover nie istnieje,
+// więc pierwszy dotyk kafelka odsłania szczegóły, kolejny je chowa.
+document.querySelectorAll('.project-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const byl = item.classList.contains('is-open');
+    document.querySelectorAll('.project-item.is-open').forEach(i => i.classList.remove('is-open'));
+    if (!byl) item.classList.add('is-open');
+  });
+});

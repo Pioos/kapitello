@@ -34,6 +34,8 @@
   /* Borders */
   --border:       rgba(233 214 174 / 0.07);
   --border-s:     rgba(233 214 174 / 0.13);
+  --amber:        #DDA64B;
+  --copper:       #B5713A;
   --gold-border:  rgba(201 164 92 / 0.30);
   --gold-border-s:rgba(201 164 92 / 0.60);
 
@@ -192,14 +194,44 @@ body::before {
   right: var(--sp-4);
   z-index: var(--z-nav);
   border-radius: var(--r-lg);
-  background: rgba(8 6 3 / 0.78);
+  background:
+    linear-gradient(100deg,
+      rgba(201 164 92 / 0.10)  0%,
+      rgba(221 166 75 / 0.14) 38%,
+      rgba(181 113 58 / 0.12) 68%,
+      rgba(201 164 92 / 0.10) 100%),
+    rgba(8 6 3 / 0.80);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border);
   transition: background 300ms, border-color 300ms, box-shadow 300ms;
 }
+/* Świecąca kreska pod paskiem — złoto → bursztyn → miedź */
+.header::after {
+  content: '';
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--primary) 22%,
+    var(--amber)  50%,
+    var(--copper) 74%,
+    transparent 100%);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
 .header.scrolled {
-  background: rgba(8 6 3 / 0.95);
+  background:
+    linear-gradient(100deg,
+      rgba(201 164 92 / 0.13)  0%,
+      rgba(221 166 75 / 0.18) 38%,
+      rgba(181 113 58 / 0.15) 68%,
+      rgba(201 164 92 / 0.13) 100%),
+    rgba(8 6 3 / 0.95);
   border-color: var(--border-s);
   box-shadow: 0 8px 32px rgba(0 0 0 / 0.4);
 }
@@ -796,7 +828,7 @@ body::before {
 .project-item--home     .project-item__image { background-image: url('assets/realizacja-dach.jpg'); }
 .project-item--farm     .project-item__image { background-image: url('assets/realizacja-grunt.jpg'); }
 .project-item--storage  .project-item__image { background-image: url('assets/realizacja-magazyn.jpg'); }
-.project-item--business .project-item__image { background-image: url('assets/realizacja-dach2.jpg'); }
+.project-item--large    .project-item__image { background-image: url('assets/realizacja-wielkoformatowa.jpg'); }
 .project-item:hover .project-item__image { transform: scale(1.06); }
 
 .project-item__overlay {
@@ -816,6 +848,25 @@ body::before {
   width: 100%;
   padding: 28px var(--sp-6);
   z-index: 2;
+}
+
+/* Lokalizacja i szczegóły — dopiero po najechaniu (desktop)
+   lub po dotknięciu kafelka (telefon, klasa .is-open z script.js) */
+.project-item__info p.project-item__meta {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(6px);
+  transition: max-height 260ms var(--ease), opacity 200ms, transform 260ms var(--ease);
+  font-size: 0.875rem;
+  color: var(--accent);
+}
+.project-item:hover .project-item__meta,
+.project-item:focus-within .project-item__meta,
+.project-item.is-open .project-item__meta {
+  max-height: 60px;
+  opacity: 1;
+  transform: translateY(0);
 }
 .project-item__tag {
   display: inline-block;
