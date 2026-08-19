@@ -1383,11 +1383,18 @@ body::before {
   display: inline-grid;
   vertical-align: top;
   color: var(--primary);
+  /* Szerokość ustawia skrypt pod aktualną frazę i płynnie ją animuje,
+     dzięki czemu nie ma ani przerwy po dłuższym słowie, ani przeskoku. */
+  transition: width 260ms var(--ease);
+  overflow: hidden;
 }
-/* Obie warstwy w tej samej komórce siatki: niewidoczny "duch" z najdłuższą
-   frazą trzyma stałą szerokość, więc nagłówek nie zmienia liczby linii. */
-.rotator > * { grid-area: 1 / 1; }
-.rotator__ghost { visibility: hidden; }
+.rotator > * { grid-area: 1 / 1; white-space: nowrap; }
+/* Warstwa pomiarowa — niewidoczna. width: max-content sprawia, że mierzy
+   naturalną szerokość frazy, a nie szerokość narzuconą kontenerowi. */
+.rotator__ghost {
+  visibility: hidden;
+  width: max-content;
+}
 .rotator__text {
   transition: opacity 240ms var(--ease), transform 240ms var(--ease);
   will-change: opacity, transform;

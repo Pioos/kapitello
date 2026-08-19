@@ -136,22 +136,41 @@ document.head.appendChild(_spinStyle);
 // nagłówka stoi w miejscu. Frazy są odmienione, bo "Twojego firmy"
 // byłoby błędem — dlatego rotuje cała fraza, nie samo słowo.
 function initRotator() {
-  const el   = document.querySelector('.rotator');
+  const el    = document.querySelector('.rotator');
+  const duch  = el?.querySelector('.rotator__ghost');
   const tekst = el?.querySelector('.rotator__text');
-  if (!el || !tekst) return;
+  if (!el || !duch || !tekst) return;
 
   const slowa = (el.dataset.slowa || '').split('|').filter(Boolean);
   if (slowa.length < 2) return;
 
+  let i = 0;
+
+  // Szerokość liczymy dla konkretnej frazy — inaczej po krótszym słowie
+  // zostawałaby przerwa zarezerwowana pod najdłuższe.
+  function dopasujSzerokosc(fraza) {
+    duch.textContent = fraza;
+    el.style.width = duch.getBoundingClientRect().width + 'px';
+  }
+
+  // Pomiar musi poczekać na wczytanie kroju, bo szerokość liczy się z fontu.
+  const ustawStart = () => dopasujSzerokosc(slowa[i]);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(ustawStart);
+  } else {
+    ustawStart();
+  }
+  window.addEventListener('resize', () => dopasujSzerokosc(slowa[i]), { passive: true });
+
   // Szanujemy ustawienie systemowe "ogranicz animacje"
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  let i = 0;
   setInterval(() => {
     el.classList.add('is-swapping');
     setTimeout(() => {
       i = (i + 1) % slowa.length;
       tekst.textContent = slowa[i];
+      dopasujSzerokosc(slowa[i]);   // szerokość jedzie płynnie, tekst jest wtedy niewidoczny
       el.classList.remove('is-swapping');
     }, 240);
   }, 3200);
