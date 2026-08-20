@@ -1,172 +1,241 @@
 /* ═══════════════════════════════════════════════════════════
-   Kapitello — wersja JASNA
-   Nakładka na styles.css: odwraca tła, zostawia tę samą paletę
-   złota. Ładowana PO styles.css, nadpisuje tylko to, co konieczne.
-   Wariant do porównania z wersją ciemną — nie kopia kodu.
+   Kapitello — wersja JASNA wg materiałów z Facebooka
+   Paleta wyciągnięta z grafik klienta:
+     granat #04182C · złoto #D2A848 · krem #F4F4F0
+   Nakładka na styles.css — nadpisuje zmienne i wybrane miejsca,
+   nie duplikuje arkusza bazowego.
    ═══════════════════════════════════════════════════════════ */
 
+/* Szeryfowy krój do nagłówków — ich materiały używają klasycznej
+   antykwy (logo, hasła). Tekst ciągły zostaje na Inter. */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap");
+
 :root {
-  /* Tła — odwrócone: ciepła biel zamiast ciemnego brązu */
-  --bg-deep:      #FDFBF6;
+  /* Tła — krem i biel z ich grafik */
+  --bg-deep:      #F4F4F0;
   --bg:           #FFFFFF;
   --bg-card:      #FFFFFF;
-  --bg-elevated:  #F6F0E4;
-  --surface:      rgba(26 20 12 / 0.035);
-  --surface-h:    rgba(26 20 12 / 0.06);
+  --bg-elevated:  #EDEDE6;
+  --surface:      rgba(4 24 44 / 0.035);
+  --surface-h:    rgba(4 24 44 / 0.07);
 
-  /* Złoto przyciemnione — #C9A45C na bieli ma za słaby kontrast
-     do czytania (ok. 2,3:1), ta wersja przechodzi WCAG AA */
-  --primary:      #96702A;
-  --primary-dark: #6F521C;
-  --primary-glow: rgba(150 112 42 / 0.20);
-  --primary-muted:rgba(150 112 42 / 0.09);
-  --accent:       #B08840;
-  --accent-dark:  #8A6A2F;
-  --accent-muted: rgba(176 136 64 / 0.12);
-  --accent-glow:  rgba(176 136 64 / 0.25);
+  /* Granat — u nich nośnik ciemnych bloków i tekstu */
+  --granat:       #04182C;
+  --granat-jasny: #0A2540;
 
-  --amber:        #C98A2E;
-  --copper:       #9C5F2C;
+  /* Złoto z ich materiałów: #D2A848 — do dużych napisów i wypełnień.
+     Do drobnego tekstu wersja przyciemniona, bo #D2A848 na kremie
+     daje ok. 2,4:1, czyli poniżej progu czytelności. */
+  --primary:      #8C6A1E;
+  --primary-dark: #6B5015;
+  --primary-glow: rgba(210 168 72 / 0.28);
+  --primary-muted:rgba(210 168 72 / 0.14);
+  --accent:       #D2A848;
+  --accent-dark:  #A87F2A;
+  --accent-muted: rgba(210 168 72 / 0.16);
+  --accent-glow:  rgba(210 168 72 / 0.30);
 
-  /* Ramki — ciemne na jasnym */
-  --border:       rgba(26 20 12 / 0.10);
-  --border-s:     rgba(26 20 12 / 0.18);
-  --gold-border:  rgba(150 112 42 / 0.30);
-  --gold-border-s:rgba(150 112 42 / 0.60);
+  --amber:        #D2A848;
+  --copper:       #A87F2A;
 
-  /* Tekst — odwrócony */
-  --text:         #1A140C;
-  --text-muted:   #5C5142;
-  --text-faint:   #9A8E79;
+  --border:       rgba(4 24 44 / 0.10);
+  --border-s:     rgba(4 24 44 / 0.20);
+  --gold-border:  rgba(210 168 72 / 0.45);
+  --gold-border-s:rgba(210 168 72 / 0.85);
+
+  /* Tekst granatowy, nie czarny — tak jak w ich grafikach */
+  --text:         #04182C;
+  --text-muted:   #4A5A6B;
+  --text-faint:   #8A97A3;
+
+  --font-naglowek: "Cormorant Garamond", Georgia, serif;
 }
 
 html { color-scheme: light; }
+body::before { opacity: 0.010; }
 
-/* Ziarno prawie niewidoczne na bieli — wyciszamy */
-body::before { opacity: 0.012; }
+/* ── Typografia: antykwa w nagłówkach ────────────────────── */
+.hero__title,
+.section__title,
+.moj-prad__card h3,
+.contact__info h3,
+.contact__form-wrap h3 {
+  font-family: var(--font-naglowek);
+  font-weight: 700;
+  letter-spacing: 0.005em;
+}
+/* Antykwa jest szersza od Space Grotesk przy tym samym stopniu, więc
+   na wąskich ekranach schodzimy niżej — inaczej "Twojego gospodarstwa."
+   wypycha kontener poza szerokość okna. */
+.hero__title    { font-size: clamp(1.95rem, 8.4vw, 4.1rem); line-height: 1.14; }
+/* Bezpiecznik: rotator nigdy nie może być szerszy niż dostępne miejsce */
+.rotator { max-width: 100%; }
+.section__title { font-size: clamp(1.9rem, 4.5vw, 2.9rem); }
+
+/* Nadkreślenie sekcji — złota kreska, jak ornamenty w ich grafikach */
+.section__eyebrow { color: var(--primary); letter-spacing: 0.22em; }
+.section__header.text-center .section__eyebrow::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 1px;
+  margin: 10px auto 0;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
 
 /* ── Pasek górny ─────────────────────────────────────────── */
 .header {
   background:
     linear-gradient(100deg,
-      rgba(201 164 92 / 0.16)  0%,
-      rgba(201 138 46 / 0.20) 38%,
-      rgba(156 95 44 / 0.16) 68%,
-      rgba(201 164 92 / 0.16) 100%),
-    rgba(255 255 255 / 0.86);
+      rgba(210 168 72 / 0.14)  0%,
+      rgba(210 168 72 / 0.22) 45%,
+      rgba(168 127 42 / 0.16) 100%),
+    rgba(252 252 250 / 0.90);
   border-color: var(--border);
 }
 .header.scrolled {
   background:
     linear-gradient(100deg,
-      rgba(201 164 92 / 0.22)  0%,
-      rgba(201 138 46 / 0.28) 38%,
-      rgba(156 95 44 / 0.22) 68%,
-      rgba(201 164 92 / 0.22) 100%),
-    rgba(255 255 255 / 0.95);
-  box-shadow: 0 8px 32px rgba(26 20 12 / 0.10);
+      rgba(210 168 72 / 0.20)  0%,
+      rgba(210 168 72 / 0.30) 45%,
+      rgba(168 127 42 / 0.22) 100%),
+    rgba(252 252 250 / 0.97);
+  box-shadow: 0 8px 28px rgba(4 24 44 / 0.10);
 }
+.nav__link { color: var(--text-muted); }
+.nav__link:hover { color: var(--granat); }
+.logo img, .footer__logo img { opacity: 1; }
 
 /* ── Hero ────────────────────────────────────────────────── */
 .hero { background: var(--bg-deep); }
-
-/* Grafika marki jest ciemna — na jasnym tle wygaszamy ją mocniej */
-.hero__bg::before { opacity: 0.05; }
-
+.hero__bg::before { opacity: 0.04; }
 .hero__bg::after {
   background:
-    radial-gradient(ellipse 60% 50% at 10% 30%, rgba(201 164 92 / 0.20) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 60% at 90% 70%, rgba(201 138 46 / 0.14) 0%, transparent 70%);
+    radial-gradient(ellipse 60% 50% at 10% 30%, rgba(210 168 72 / 0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 90% 70%, rgba(4 24 44 / 0.06) 0%, transparent 70%);
 }
-
 .hero__overlay {
   background: linear-gradient(
     160deg,
-    rgba(255 255 255 / 0.55) 0%,
-    rgba(255 255 255 / 0.20) 50%,
-    rgba(255 255 255 / 0.65) 100%
+    rgba(244 244 240 / 0.60) 0%,
+    rgba(244 244 240 / 0.25) 50%,
+    rgba(244 244 240 / 0.70) 100%
   );
 }
 
-/* Przyciski na jasnym: złoty wypełniony ma ciemny tekst */
-.btn--primary { background: var(--accent); color: #FFFFFF; }
-.btn--primary:hover { background: var(--primary); }
-.btn--accent  { background: var(--accent); color: #FFFFFF; }
-.btn--accent:hover  { background: var(--primary); }
-.btn--nav     { background: var(--accent); color: #FFFFFF; }
-.btn--nav:hover     { background: var(--primary); }
-.btn--outline { color: var(--text); border-color: var(--border-s); }
+/* Wyróżnienie w haśle — złoto na kremie.
+   UWAGA: skrót `background` kasuje background-clip z arkusza bazowego,
+   dlatego trzeba go powtórzyć, inaczej gradient wypełnia prostokąt
+   zamiast liter i tekst znika. */
+.hero__title span {
+  background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 45%, var(--accent-dark) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.hero__badge {
+  color: var(--granat);
+  border-color: var(--gold-border);
+  background: rgba(210 168 72 / 0.14);
+}
+.hero__trust-item { color: var(--text-muted); }
 
-/* ── Karty i sekcje ──────────────────────────────────────── */
+/* ── Przyciski: złote wypełnienie, granatowy tekst ───────── */
+.btn--primary,
+.btn--accent,
+.btn--nav {
+  background: var(--accent);
+  color: var(--granat);
+}
+.btn--primary:hover,
+.btn--accent:hover,
+.btn--nav:hover { background: var(--accent-dark); color: #FFFFFF; }
+.btn--outline { color: var(--granat); border-color: var(--border-s); }
+.btn--outline:hover { border-color: var(--accent); color: var(--primary); }
+.btn--ghost { color: var(--text-muted); border-color: var(--border); }
+.btn--ghost:hover { color: var(--granat); }
+
+/* ── Karty ───────────────────────────────────────────────── */
 .service-card,
 .dotacje-card,
 .moj-prad__card,
 .contact__info,
 .contact__form-wrap {
-  box-shadow: 0 2px 12px rgba(26 20 12 / 0.05);
+  box-shadow: 0 2px 14px rgba(4 24 44 / 0.06);
 }
-.dotacje-card--cta { background: var(--primary-muted); }
+.dotacje-card--cta { background: rgba(210 168 72 / 0.12); }
+.service-card__icon,
+.about__feature-icon,
+.contact__detail-icon { color: var(--primary); }
 
-/* ── Realizacje: przyciemnienie pod tekstem zostaje ciemne,
-      bo leży na zdjęciu, nie na tle strony ──────────────── */
+/* ── Bloki granatowe — kontrapunkt, jak w ich grafikach ──── */
+.stats { background: var(--granat); }
+.stats .stat-item__label { color: rgba(244 244 240 / 0.75); }
+.stat-item { border-color: rgba(244 244 240 / 0.14); }
+/* Liczniki leżą na granacie — bazowy arkusz koloruje je przez `color`,
+   nie przez gradient przycięty do tekstu, więc wystarczy zmienić kolor.
+   Gradient nic by nie dał: text-fill-color nie jest przezroczysty. */
+.stats .stat-item__number { color: var(--accent); }
+.stats .stat-item__number span { color: #E8C878; }
+
+.careers { background: var(--granat); }
+.careers::before { opacity: 0.05; }
+.careers .section__title { color: #F4F4F0; }
+.careers .section__eyebrow { color: var(--accent); }
+.careers__desc { color: rgba(244 244 240 / 0.80); }
+.careers .btn--ghost {
+  color: #F4F4F0;
+  border-color: rgba(244 244 240 / 0.30);
+  background: rgba(244 244 240 / 0.06);
+}
+.careers .btn--ghost:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ── Realizacje — napisy leżą na zdjęciu, zostają jasne ──── */
 .project-item__info h3 { color: #FFFFFF; }
-.project-item .project-item__meta { color: #F0DFB8; }
-
-/* ── Praca: wygaszona grafika w tle ──────────────────────── */
-.careers::before { opacity: 0.03; }
-
-/* ── Stopka ──────────────────────────────────────────────── */
-.footer {
-  background:
-    linear-gradient(to bottom, rgba(246 240 228 / 0.94) 0%, rgba(240 232 214 / 0.97) 100%),
-    url('assets/kapitello_background.jpg') center / cover no-repeat;
-  border-top: 1px solid var(--border);
+.project-item .project-item__meta { color: #E8C878; }
+.project-item__overlay {
+  background: linear-gradient(to top, rgba(4 24 44 / 0.92) 0%, rgba(4 24 44 / 0.15) 60%, transparent 100%);
 }
-.footer__logo img { opacity: 1; }
-.logo img         { opacity: 1; }
+.project-item:hover .project-item__overlay {
+  background: linear-gradient(to top, rgba(4 24 44 / 0.96) 0%, rgba(210 168 72 / 0.25) 60%, transparent 100%);
+}
 
-/* ── Social ──────────────────────────────────────────────── */
-.social__link { background: rgba(255 255 255 / 0.7); }
-.social__link:hover { color: #FFFFFF; }
+/* ── Dotacje ─────────────────────────────────────────────── */
+.moj-prad__highlight {
+  border-color: var(--gold-border);
+  background: rgba(210 168 72 / 0.10);
+}
+.moj-prad__highlight p { color: var(--primary-dark); }
+
+/* ── Stopka — granatowa ze złotą krawędzią ───────────────── */
+.footer {
+  background: var(--granat);
+  border-top: 3px solid var(--accent);
+}
+.footer__brand p { color: rgba(244 244 240 / 0.72); }
+.footer__col h4  { color: var(--accent); }
+.footer__col ul a { color: rgba(244 244 240 / 0.72); }
+.footer__col ul a:hover { color: var(--accent); }
+.footer__bottom {
+  color: rgba(244 244 240 / 0.60);
+  border-color: rgba(244 244 240 / 0.15);
+}
+.footer__credit span { color: var(--accent); }
+.social__link {
+  color: var(--accent);
+  border-color: rgba(210 168 72 / 0.45);
+  background: rgba(244 244 240 / 0.05);
+}
+.social__link:hover { color: var(--granat); }
 
 /* ── Formularz ───────────────────────────────────────────── */
 .form__group input,
 .form__group textarea,
 .form__group select {
   background: #FFFFFF;
+  border-color: var(--border-s);
   color-scheme: light;
 }
+.form__group label { color: var(--granat); }
 
-/* ── Miejsca z jasnym kolorem wpisanym na sztywno ─────────
-   #F0E2BC i #E3C88E to odcienie dobrane pod ciemne tło —
-   na bieli znikają, więc podmieniamy je na ciemniejsze złoto. */
-
-.hero__badge {
-  color: var(--primary);
-  border-color: var(--gold-border);
-  background: rgba(150 112 42 / 0.08);
-}
-
-/* Gradient wypełniający nagłówek — przyciemniony, żeby tekst
-   pozostał czytelny na białym tle.
-   UWAGA: skrót `background` kasuje background-clip ustawiony w styles.css,
-   więc trzeba go powtórzyć — inaczej gradient wypełnia cały prostokąt
-   zamiast liter, a tekst znika (jest przezroczysty). */
-.hero__title span {
-  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--accent-dark) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-.moj-prad__highlight p { color: var(--primary-dark); }
-.moj-prad__highlight {
-  border-color: var(--gold-border);
-  background: rgba(150 112 42 / 0.07);
-}
-
-/* Podkreślenia i separatory rysowane jasnym gradientem */
-.section__title::after,
-.stat-item__number { background: linear-gradient(90deg, var(--primary), var(--accent)); }
-
-/* Rotująca fraza — ciemniejsze złoto */
-.rotator { color: var(--primary); }
+/* ── Rotująca fraza ──────────────────────────────────────── */
+.rotator { color: var(--accent-dark); }

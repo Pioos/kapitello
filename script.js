@@ -278,7 +278,7 @@ function initHeroCanvas() {
     hexes.forEach(h => {
       hexPath(h.x, h.y, h.s - 1);
       ctx.strokeStyle = jasny
-        ? `rgba(150,112,42,${h.o * 2.2})`
+        ? `rgba(4,24,44,${h.o * 1.8})`
         : `rgba(233,214,174,${h.o * 1.5})`;
       ctx.stroke();
     });
@@ -293,8 +293,8 @@ function initHeroCanvas() {
       const a   = p.life * 0.95;
       const col = jasny
         ? (p.gold
-            ? `rgba(150,112,42,${a})`    // ciemne złoto — widoczne na bieli
-            : `rgba(176,136,64,${a})`)
+            ? `rgba(210,168,72,${a})`    // złoto z materiałów FB
+            : `rgba(4,24,44,${a * 0.55})`)  // granat, przygaszony
         : (p.gold
             ? `rgba(250,240,214,${a})`   // jasny szampan
             : `rgba(232,213,168,${a})`); // złoto rozjaśnione
