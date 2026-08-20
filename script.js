@@ -212,6 +212,8 @@ function initHeroCanvas() {
   heroBg.appendChild(canvas);
 
   const ctx   = canvas.getContext('2d');
+  // Wersja jasna rysuje ciemnym złotem, bo jasne cząstki znikają na bieli
+  const jasny = document.body.classList.contains('motyw-jasny');
   const EASE  = 'cubic-bezier(0.16,1,0.3,1)';
   let W, H, hexes = [], particles = [];
 
@@ -275,7 +277,9 @@ function initHeroCanvas() {
     ctx.lineWidth = 0.5;
     hexes.forEach(h => {
       hexPath(h.x, h.y, h.s - 1);
-      ctx.strokeStyle = `rgba(233,214,174,${h.o * 1.5})`;
+      ctx.strokeStyle = jasny
+        ? `rgba(150,112,42,${h.o * 2.2})`
+        : `rgba(233,214,174,${h.o * 1.5})`;
       ctx.stroke();
     });
 
@@ -287,9 +291,13 @@ function initHeroCanvas() {
       p.y    += p.vy;
       p.life -= p.decay;
       const a   = p.life * 0.95;
-      const col = p.gold
-        ? `rgba(250,240,214,${a})`   // jasny szampan
-        : `rgba(232,213,168,${a})`;  // złoto rozjaśnione
+      const col = jasny
+        ? (p.gold
+            ? `rgba(150,112,42,${a})`    // ciemne złoto — widoczne na bieli
+            : `rgba(176,136,64,${a})`)
+        : (p.gold
+            ? `rgba(250,240,214,${a})`   // jasny szampan
+            : `rgba(232,213,168,${a})`); // złoto rozjaśnione
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fillStyle   = col;
