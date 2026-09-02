@@ -302,31 +302,39 @@
     <!-- ═══ O NAS ══════════════════════════════════════════════ -->
     <section id="o-nas" class="section about" aria-labelledby="about-title">
       <div class="container">
-        <div class="about__frame reveal">
-          <span class="about__corner about__corner--tl" aria-hidden="true"></span>
-          <span class="about__corner about__corner--tr" aria-hidden="true"></span>
-          <span class="about__corner about__corner--bl" aria-hidden="true"></span>
-          <span class="about__corner about__corner--br" aria-hidden="true"></span>
+        <div class="about__grid">
+          <div class="about__media reveal">
+            <span class="about__label" aria-hidden="true">Energia z natury</span>
+            <figure class="about__photo-wrap">
+              <img class="about__photo" src="assets/galeria/grunt-3.jpg" alt="Instalacja fotowoltaiczna na gruncie zrealizowana przez Kapitello" loading="lazy">
+            </figure>
+            <figure class="about__photo-wrap about__photo-wrap--small">
+              <img class="about__photo" src="assets/galeria/magazyn-6.jpg" alt="Falownik i magazyn energii zamontowane przez Kapitello" loading="lazy">
+            </figure>
+          </div>
 
-          <div class="about__content">
-            <div class="about__photo" role="img" aria-label="Instalacja fotowoltaiczna zrealizowana przez Kapitello"></div>
-            <div class="about__body">
-              <p class="section__eyebrow">O firmie</p>
-              <h2 class="section__title" id="about-title">Kapitello — energia z&nbsp;natury</h2>
-              <p class="about__text">
-                Firma z Zduńskiej Woli. Projektujemy i montujemy instalacje fotowoltaiczne oraz
-                magazyny energii dla domów, firm i gospodarstw w województwie łódzkim.
-              </p>
-              <p class="about__text">
-                Działamy kompleksowo: audyt, projekt, montaż, formalności i pomoc w pozyskaniu
-                dotacji. Jeden wykonawca od pierwszej rozmowy po uruchomienie instalacji.
-              </p>
-              <ul class="about__list" role="list">
-                <li><strong>Certyfikowani instalatorzy</strong> — wymagane uprawnienia i certyfikaty branżowe</li>
-                <li><strong>Pomoc w finansowaniu</strong> — dotacje i dofinansowania na OZE</li>
-                <li><strong>Gwarancja i serwis</strong> — wsparcie techniczne po montażu</li>
-              </ul>
-            </div>
+          <div class="about__body reveal reveal--delay-1">
+            <p class="section__eyebrow">O firmie</p>
+            <h2 class="section__title" id="about-title">Instalacje, które projektujemy, montujemy i&nbsp;serwisujemy sami.</h2>
+            <p class="about__lead">
+              Kapitello to firma z Zduńskiej Woli. Fotowoltaika i magazyny energii dla domów,
+              firm i gospodarstw w województwie łódzkim — od pierwszej rozmowy po uruchomienie.
+            </p>
+            <ol class="about__steps" role="list">
+              <li class="about__step">
+                <span class="about__num">01</span>
+                <div><strong>Audyt i projekt</strong><p>Sprawdzamy zużycie, dach lub grunt i dobieramy moc pod realne rachunki, nie pod katalog.</p></div>
+              </li>
+              <li class="about__step">
+                <span class="about__num">02</span>
+                <div><strong>Montaż i formalności</strong><p>Własna ekipa z wymaganymi uprawnieniami. Zgłoszenie do sieci i wnioski o dotacje robimy za Ciebie.</p></div>
+              </li>
+              <li class="about__step">
+                <span class="about__num">03</span>
+                <div><strong>Serwis po montażu</strong><p>Gwarancja, monitoring pracy instalacji i wsparcie techniczne, kiedy będzie potrzebne.</p></div>
+              </li>
+            </ol>
+            <a href="#kontakt" class="btn btn--outline">Umów bezpłatny audyt</a>
           </div>
         </div>
       </div>
@@ -507,6 +515,14 @@
     </div>
   </footer>
 
+
+  <!-- Przełącznik czcionek — narzędzie robocze do porównania, do usunięcia przed publikacją -->
+  <div class="font-switch" aria-label="Porównanie zestawów czcionek">
+    <button type="button" data-font="">0 · obecne</button>
+    <button type="button" data-font="font-a">A · Fraunces</button>
+    <button type="button" data-font="font-b">B · Cormorant</button>
+    <button type="button" data-font="font-c">C · Bodoni</button>
+  </div>
 
   <!-- Galeria realizacji (lightbox) — wypełniana przez script.js -->
   <div class="lightbox" id="lightbox" hidden aria-modal="true" role="dialog" aria-label="Galeria realizacji">

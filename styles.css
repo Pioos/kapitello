@@ -8,6 +8,8 @@
 
 /* ── Google Fonts ────────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+/* Zestawy do porównania (robocze) — po wyborze zostaje jeden, resztę usuwamy */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600;6..96,700&family=Source+Sans+3:wght@400;500;600&display=swap');
 
 /* ── Variables ───────────────────────────────────────────── */
 :root {
@@ -1490,36 +1492,6 @@ body::before {
 .social__link:hover { color: var(--bg-deep); border-color: transparent; background: linear-gradient(135deg, var(--primary), var(--amber) 55%, var(--copper)); transform: translateY(-3px); }
 .social__link svg { width: 20px; height: 20px; }
 
-/* ═══ O firmie w ramce ═══ */
-.about__frame {
-  position: relative;
-  padding: clamp(28px, 5vw, 56px);
-  border: 1px solid var(--gold-border);
-  background: linear-gradient(135deg, rgba(201 164 92 / 0.06), transparent 60%), var(--bg-card);
-}
-.about__corner {
-  position: absolute; width: 28px; height: 28px;
-  border: 2px solid var(--primary);
-}
-.about__corner--tl { top: -2px; left: -2px;  border-right: 0; border-bottom: 0; }
-.about__corner--tr { top: -2px; right: -2px; border-left: 0;  border-bottom: 0; }
-.about__corner--bl { bottom: -2px; left: -2px;  border-right: 0; border-top: 0; }
-.about__corner--br { bottom: -2px; right: -2px; border-left: 0;  border-top: 0; }
-.about__frame .about__content { display: grid; grid-template-columns: 1fr; gap: var(--sp-8); align-items: center; }
-.about__photo {
-  aspect-ratio: 4 / 3; min-height: 240px;
-  background: url('assets/galeria/grunt-3.jpg') center / cover no-repeat;
-  border: 1px solid var(--gold-border);
-  box-shadow: 16px 16px 0 -8px rgba(201 164 92 / 0.18);
-}
-.about__list { display: grid; gap: var(--sp-3); margin-top: var(--sp-6); }
-.about__list li { position: relative; padding-left: 22px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
-.about__list li::before { content: '◆'; position: absolute; left: 0; top: 0.15em; font-size: 0.65rem; color: var(--primary); }
-.about__list strong { color: var(--text); }
-@media (min-width: 900px) {
-  .about__frame .about__content { grid-template-columns: 5fr 7fr; gap: var(--sp-12); }
-}
-
 /* ═══ Realizacje: kliknięcie otwiera galerię ═══ */
 .project-item { cursor: pointer; }
 .project-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -1557,4 +1529,75 @@ body::before {
 @media (max-width: 600px) {
   .lightbox { grid-template-columns: 44px 1fr 44px; }
   .lightbox__nav, .lightbox__close { width: 44px; height: 44px; font-size: 1.8rem; }
+}
+
+
+/* ═══ Zestawy czcionek do porównania ═══
+   A — Fraunces + Manrope: serif z charakterem, ciepły, rzemieślniczy
+   B — Cormorant Garamond + Instrument Sans: klasyczna antykwa jak w ich logo
+   C — Bodoni Moda + Source Sans 3: wysoki kontrast, premium
+   --font-ui: przyciski i nawigacja zawsze bezszeryfowe. */
+.font-a { --font-display: 'Fraunces', Georgia, serif; --font-body: 'Manrope', sans-serif; --font-ui: 'Manrope', sans-serif; }
+.font-b { --font-display: 'Cormorant Garamond', Georgia, serif; --font-body: 'Instrument Sans', sans-serif; --font-ui: 'Instrument Sans', sans-serif; }
+.font-c { --font-display: 'Bodoni Moda', 'Didot', serif; --font-body: 'Source Sans 3', sans-serif; --font-ui: 'Source Sans 3', sans-serif; }
+.btn, .nav__link, .menu-toggle, .hero__badge, .section__eyebrow, .project-item__count, .stat-item__label, .form__group label { font-family: var(--font-ui, var(--font-body)); }
+.font-a .hero__title, .font-b .hero__title, .font-c .hero__title { font-weight: 600; letter-spacing: -0.01em; }
+.font-a .section__title, .font-b .section__title, .font-c .section__title { font-weight: 600; letter-spacing: 0; }
+.font-b .hero__title    { font-size: clamp(2.3rem, 7.6vw, 4.6rem); font-weight: 700; line-height: 1.08; }
+.font-b .section__title { font-size: clamp(2rem, 4.6vw, 3.1rem); font-weight: 700; }
+.font-c .hero__title    { line-height: 1.1; }
+.font-a .stat-item__number, .font-b .stat-item__number, .font-c .stat-item__number { font-family: var(--font-display); font-weight: 600; }
+
+.font-switch {
+  position: fixed; left: 12px; bottom: 12px; z-index: 1500;
+  display: flex; gap: 4px; padding: 4px;
+  background: rgba(8 6 3 / 0.9); border: 1px solid var(--gold-border); border-radius: 8px;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.font-switch button {
+  background: none; color: var(--text-muted); font: 600 11px/1 'Inter', sans-serif;
+  padding: 8px 10px; border-radius: 5px; letter-spacing: 0.04em;
+}
+.font-switch button.is-active { background: var(--primary); color: var(--bg-deep); }
+
+/* ═══ O firmie — układ redakcyjny (bez pudełka) ═══ */
+.about { background: var(--bg); border-block: 1px solid var(--border); position: relative; }
+.about__grid { display: grid; grid-template-columns: 1fr; gap: var(--sp-12); align-items: center; }
+.about__media { position: relative; padding-left: 28px; }
+.about__label {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-family: var(--font-ui, var(--font-body)); font-size: 0.68rem; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--primary); opacity: 0.85; white-space: nowrap;
+}
+.about__label::before { content: ''; display: inline-block; width: 1px; height: 40px; margin-bottom: 14px; background: var(--primary); vertical-align: middle; }
+.about__photo-wrap { position: relative; margin: 0; }
+.about__photo-wrap::before {
+  content: ''; position: absolute; inset: 0; transform: translate(14px, 14px);
+  border: 1px solid var(--gold-border-s); pointer-events: none;
+}
+.about__photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; filter: saturate(0.92); }
+.about__photo-wrap--small {
+  position: absolute; right: -8px; bottom: -36px; width: 46%;
+  border: 6px solid var(--bg); box-shadow: 0 24px 48px rgba(0 0 0 / 0.5);
+}
+.about__photo-wrap--small::before { display: none; }
+.about__photo-wrap--small .about__photo { aspect-ratio: 4 / 3; }
+.about__body .section__title { font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1.18; text-wrap: balance; }
+.about__lead { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; margin-bottom: var(--sp-8); max-width: 52ch; }
+.about__steps { display: grid; margin-bottom: var(--sp-8); }
+.about__step {
+  display: grid; grid-template-columns: 44px 1fr; gap: var(--sp-4); align-items: start;
+  padding: var(--sp-4) 0; border-top: 1px solid var(--border);
+}
+.about__step:last-child { border-bottom: 1px solid var(--border); }
+.about__num { font-family: var(--font-display); font-size: 1.1rem; color: var(--primary); line-height: 1.5; letter-spacing: 0.04em; }
+.about__step strong { display: block; color: var(--text); font-size: 1rem; margin-bottom: 4px; }
+.about__step p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
+@media (min-width: 900px) {
+  .about__grid { grid-template-columns: 5fr 6fr; gap: var(--sp-16); }
+  .about__media { padding-left: 36px; margin-bottom: 36px; }
+}
+@media (max-width: 899px) {
+  .about__media { margin-bottom: 44px; }
 }
