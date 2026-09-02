@@ -327,13 +327,23 @@ function initHeroCanvas() {
   }
   function zamknij() { lb.hidden = true; document.body.style.overflow = ''; }
 
-  document.querySelectorAll('.project-item[data-galeria]').forEach(item => {
+  document.querySelectorAll('[data-galeria]').forEach(item => {
     // licznik zdjęć na kafelku
     const badge = document.createElement('span');
     badge.className = 'project-item__count';
-    badge.textContent = `${item.dataset.liczba} zdjęć`;
+    const n = parseInt(item.dataset.liczba, 10) || 0;
+    const forma = n === 1 ? 'zdjęcie' : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 'zdjęcia' : 'zdjęć';
+    badge.textContent = `${n} ${forma}`;
     item.appendChild(badge);
-    item.addEventListener('click', () => otworz(item));
+    item.addEventListener('click', () => {
+      // Harmonijka na dotyku: pierwszy klik rozwija panel, drugi otwiera galerię
+      if (item.classList.contains('acc__panel') && window.matchMedia('(max-width: 899px)').matches && !item.classList.contains('is-open')) {
+        document.querySelectorAll('.acc__panel.is-open').forEach(p => p.classList.remove('is-open'));
+        item.classList.add('is-open');
+        return;
+      }
+      otworz(item);
+    });
     item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); otworz(item); } });
   });
   lb.querySelector('.lightbox__close').addEventListener('click', zamknij);
@@ -346,4 +356,40 @@ function initHeroCanvas() {
     if (e.key === 'ArrowLeft') pokaz(idx - 1);
     if (e.key === 'ArrowRight') pokaz(idx + 1);
   });
+})();
+
+
+// ── Kalkulator oszczędności ───────────────────────────────
+// Wszystkie stałe są orientacyjne i wypisane w sekcji "Założenia".
+(function initKalkulator() {
+  const bill = document.getElementById('calc-bill');
+  const range = document.getElementById('calc-range');
+  const storage = document.getElementById('calc-storage');
+  if (!bill || !range || !storage) return;
+  const out = id => document.getElementById(id);
+  const CENA = 1.15, SPRZEDAZ = 0.40, UZYSK = 1000, AUTO_BEZ = 0.35, AUTO_Z = 0.70, KOSZT_KWP = 4500, KWH_NA_KWP = 1.5, KOSZT_KWH = 3200;
+  const pln = n => Math.round(n).toLocaleString('pl-PL');
+
+  function licz() {
+    const rachunek = Math.min(3000, Math.max(50, Number(bill.value) || 0));
+    const zMag = storage.checked;
+    const zuzycie = rachunek * 12 / CENA;
+    const moc = Math.min(50, Math.max(3, Math.round(zuzycie / UZYSK * 1.15 * 2) / 2));
+    const magazyn = zMag ? Math.round(moc * KWH_NA_KWP) : 0;
+    const produkcja = moc * UZYSK;
+    const wlasne = Math.min(produkcja * (zMag ? AUTO_Z : AUTO_BEZ), zuzycie);
+    const nadwyzka = Math.max(0, produkcja - wlasne);
+    const oszczednosc = wlasne * CENA + nadwyzka * SPRZEDAZ;
+    const koszt = moc * KOSZT_KWP + magazyn * KOSZT_KWH;
+    const zwrot = oszczednosc > 0 ? koszt / oszczednosc : 0;
+    out('out-kwp').textContent = moc.toLocaleString('pl-PL');
+    out('out-kwh').textContent = magazyn.toLocaleString('pl-PL');
+    out('row-storage').hidden = !zMag;
+    out('out-save').textContent = pln(oszczednosc);
+    out('out-roi').textContent = zwrot.toFixed(1).replace('.', ',');
+  }
+  bill.addEventListener('input', () => { range.value = bill.value; licz(); });
+  range.addEventListener('input', () => { bill.value = range.value; licz(); });
+  storage.addEventListener('change', licz);
+  licz();
 })();

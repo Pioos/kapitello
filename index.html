@@ -92,6 +92,7 @@
         <ul class="nav__list">
           <li><a href="#projekty" class="nav__link">Realizacje</a></li>
           <li><a href="#oferta"   class="nav__link">Oferta</a></li>
+          <li><a href="#kalkulator" class="nav__link">Kalkulator</a></li>
           <li><a href="#dotacje"  class="nav__link">Dotacje i programy</a></li>
           <li><a href="#o-nas"    class="nav__link">O nas</a></li>
           <li><a href="#praca"    class="nav__link">Praca</a></li>
@@ -159,39 +160,44 @@
           <h2 class="section__title" id="projects-title">Realizacje</h2>
           <p class="section__subtitle">Instalacje ze Zduńskiej Woli i okolic. Kliknij kafelek, żeby zobaczyć więcej zdjęć.</p>
         </div>
-        <div class="projects__grid">
-          <div class="project-item project-item--home reveal" data-galeria="dach" data-liczba="3" role="button" tabindex="0">
-            <div class="project-item__image" role="img" aria-label="Instalacja fotowoltaiczna na dachu budynku"></div>
-            <div class="project-item__overlay" aria-hidden="true"></div>
-            <div class="project-item__info">
+        <div class="acc" aria-label="Kategorie realizacji">
+          <article class="acc__panel is-open" data-galeria="dach" data-liczba="3" role="button" tabindex="0">
+            <img src="assets/galeria/dach-2.jpg" alt="Instalacja fotowoltaiczna na dachu domu" loading="lazy" width="1400" height="1050">
+            <span class="acc__label" aria-hidden="true">Dach</span>
+            <div class="acc__body">
               <h3>Instalacja na dachu</h3>
-              <p class="project-item__meta">Powiat zduńskowolski</p>
+              <p>Domy jednorodzinne, garaże, hale. Powiat zduńskowolski.</p>
+              <span class="acc__more">Zobacz zdjęcia</span>
             </div>
-          </div>
-          <div class="project-item project-item--farm reveal reveal--delay-1" data-galeria="grunt" data-liczba="6" role="button" tabindex="0">
-            <div class="project-item__image" role="img" aria-label="Instalacja fotowoltaiczna wolnostojąca na gruncie"></div>
-            <div class="project-item__overlay" aria-hidden="true"></div>
-            <div class="project-item__info">
+          </article>
+          <article class="acc__panel" data-galeria="grunt" data-liczba="6" role="button" tabindex="0">
+            <img src="assets/galeria/grunt-1.jpg" alt="Instalacja fotowoltaiczna wolnostojąca na gruncie" loading="lazy" width="1400" height="1050">
+            <span class="acc__label" aria-hidden="true">Grunt</span>
+            <div class="acc__body">
               <h3>Instalacja na gruncie</h3>
-              <p class="project-item__meta">Region łódzki · konstrukcja wolnostojąca</p>
+              <p>Konstrukcje wolnostojące przy domach i gospodarstwach. Region łódzki.</p>
+              <span class="acc__more">Zobacz zdjęcia</span>
             </div>
-          </div>
-          <div class="project-item project-item--large reveal reveal--delay-2" data-galeria="wielkoformatowa" data-liczba="4" role="button" tabindex="0">
-            <div class="project-item__image" role="img" aria-label="Wielkoformatowa instalacja fotowoltaiczna"></div>
-            <div class="project-item__overlay" aria-hidden="true"></div>
-            <div class="project-item__info">
+          </article>
+          <article class="acc__panel" data-galeria="wielkoformatowa" data-liczba="4" role="button" tabindex="0">
+            <img src="assets/galeria/wielkoformatowa-2.jpg" alt="Wielkoformatowa instalacja fotowoltaiczna" loading="lazy" width="1400" height="1050">
+            <span class="acc__label" aria-hidden="true">Wielkoformatowe</span>
+            <div class="acc__body">
               <h3>Instalacja wielkoformatowa</h3>
-              <p class="project-item__meta">Region łódzki · obiekt komercyjny</p>
+              <p>Obiekty komercyjne i farmy. Od projektu po przyłączenie do sieci.</p>
+              <span class="acc__more">Zobacz zdjęcia</span>
             </div>
-          </div>
-          <div class="project-item project-item--storage reveal reveal--delay-3" data-galeria="magazyn" data-liczba="8" role="button" tabindex="0">
-            <div class="project-item__image" role="img" aria-label="Magazyn energii i falownik w pomieszczeniu technicznym"></div>
-            <div class="project-item__overlay" aria-hidden="true"></div>
-            <div class="project-item__info">
+          </article>
+          <article class="acc__panel" data-galeria="magazyn" data-liczba="8" role="button" tabindex="0">
+            <img src="assets/galeria/magazyn-6.jpg" alt="Falownik i magazyn energii w garażu" loading="lazy" width="1400" height="1050">
+            <span class="acc__label" aria-hidden="true">Magazyny</span>
+            <div class="acc__body">
               <h3>Magazyny energii</h3>
-              <p class="project-item__meta">Instalacja domowa · falownik i magazyn</p>
+              <p>Falowniki i magazyny w instalacjach domowych. Nadwyżka z dnia zużywana wieczorem.</p>
+              <span class="acc__more">Zobacz zdjęcia</span>
             </div>
-          </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -257,6 +263,66 @@
             <p class="service-card__desc">Analiza dostępnych form wsparcia finansowego oraz przygotowanie kompletnej dokumentacji aplikacyjnej. Pomagamy w pozyskiwaniu bezzwrotnych dotacji i preferencyjnych kredytów na rozwój infrastruktury energetycznej.</p>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ KALKULATOR ════════════════════════════════════════ -->
+    <section id="kalkulator" class="section calc" aria-labelledby="calc-title">
+      <div class="container">
+        <div class="calc__grid">
+          <div class="calc__intro reveal">
+            <p class="section__eyebrow">Kalkulator</p>
+            <h2 class="section__title" id="calc-title">Ile możesz oszczędzać?</h2>
+            <p class="calc__lead">Wpisz miesięczny rachunek za prąd. Policzymy orientacyjną moc instalacji, roczną oszczędność i czas zwrotu.</p>
+
+            <form class="calc__form" id="calc-form" novalidate>
+              <label class="calc__field" for="calc-bill">
+                <span class="calc__label">Miesięczny rachunek za prąd</span>
+                <span class="calc__input">
+                  <input type="number" id="calc-bill" name="bill" min="50" max="3000" step="10" value="350" inputmode="numeric">
+                  <span>zł</span>
+                </span>
+              </label>
+              <input type="range" id="calc-range" min="100" max="1500" step="10" value="350" aria-label="Miesięczny rachunek za prąd, suwak">
+              <label class="calc__toggle">
+                <input type="checkbox" id="calc-storage" checked>
+                <span class="calc__switch" aria-hidden="true"></span>
+                <span>Z magazynem energii</span>
+              </label>
+            </form>
+
+            <details class="calc__assumptions">
+              <summary>Założenia do obliczeń</summary>
+              <ul>
+                <li>cena energii 1,15 zł/kWh, sprzedaż nadwyżek 0,40 zł/kWh (net-billing)</li>
+                <li>uzysk 1000 kWh rocznie z 1 kWp, zużycie na miejscu 35% bez magazynu i 70% z magazynem</li>
+                <li>koszt orientacyjny: 4 500 zł za 1 kWp, magazyn 1,5 kWh na 1 kWp po 3 200 zł/kWh</li>
+                <li>wynik bez dotacji; z dotacją zwrot jest krótszy</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="calc__result reveal reveal--delay-1" aria-live="polite">
+            <div class="calc__row">
+              <span class="calc__key">Sugerowana moc</span>
+              <span class="calc__val"><b id="out-kwp">0</b> kWp</span>
+            </div>
+            <div class="calc__row" id="row-storage">
+              <span class="calc__key">Magazyn energii</span>
+              <span class="calc__val"><b id="out-kwh">0</b> kWh</span>
+            </div>
+            <div class="calc__row calc__row--big">
+              <span class="calc__key">Roczna oszczędność</span>
+              <span class="calc__val"><b id="out-save">0</b> zł</span>
+            </div>
+            <div class="calc__row">
+              <span class="calc__key">Zwrot z inwestycji</span>
+              <span class="calc__val"><b id="out-roi">0</b> lat</span>
+            </div>
+            <p class="calc__note">Wyliczenie orientacyjne. Dokładną moc i koszt podamy po audycie zużycia i dachu lub gruntu.</p>
+            <a href="#kontakt" class="btn btn--primary">Zapytaj o dokładną wycenę</a>
+          </div>
         </div>
       </div>
     </section>
