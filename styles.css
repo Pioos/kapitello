@@ -1586,3 +1586,23 @@ body::before {
 .font-a .rotator > * { line-height: inherit; }
 /* Pasek faktów zamiast liczników */
 .stat-item__number--text { font-size: 1.35rem; letter-spacing: 0; }
+
+
+/* ═══ Social w pasku górnym — po prawej od przycisku Kontakt ═══ */
+.nav__social { display: flex; align-items: center; gap: var(--sp-2); }
+.social__link--nav { width: 40px; height: 40px; }
+.social__link--nav svg { width: 17px; height: 17px; }
+/* W szufladzie mobilnej: własny wiersz pod nawigacją, pełne cele dotykowe */
+@media (max-width: 1023px) {
+  .nav__social {
+    width: 100%;
+    margin-top: var(--sp-4);
+    padding-top: var(--sp-6);
+    border-top: 1px solid var(--border);
+  }
+  .social__link--nav { width: 44px; height: 44px; }
+  .social__link--nav svg { width: 19px; height: 19px; }
+}
+@media (min-width: 1024px) {
+  .nav__social { margin-left: var(--sp-3); }
+}
