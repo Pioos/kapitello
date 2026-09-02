@@ -347,21 +347,3 @@ function initHeroCanvas() {
     if (e.key === 'ArrowRight') pokaz(idx + 1);
   });
 })();
-
-
-// ── Przełącznik czcionek (narzędzie robocze) ────────────────
-// ?font=font-a|font-b|font-c w adresie albo klik w pasek; wybór zapamiętany.
-(function initFontSwitch() {
-  const pasek = document.querySelector('.font-switch');
-  if (!pasek) return;
-  const zUrl = new URLSearchParams(location.search).get('font');
-  let wybor = zUrl ?? localStorage.getItem('kapitello-font') ?? '';
-  function ustaw(kl) {
-    document.body.classList.remove('font-a', 'font-b', 'font-c');
-    if (kl) document.body.classList.add(kl);
-    try { localStorage.setItem('kapitello-font', kl); } catch (e) {}
-    pasek.querySelectorAll('button').forEach(b => b.classList.toggle('is-active', b.dataset.font === kl));
-  }
-  ustaw(['font-a', 'font-b', 'font-c'].includes(wybor) ? wybor : '');
-  pasek.addEventListener('click', e => { const b = e.target.closest('button'); if (b) ustaw(b.dataset.font); });
-})();

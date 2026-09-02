@@ -1548,17 +1548,6 @@ body::before {
 .font-c .hero__title    { line-height: 1.1; }
 .font-a .stat-item__number, .font-b .stat-item__number, .font-c .stat-item__number { font-family: var(--font-display); font-weight: 600; }
 
-.font-switch {
-  position: fixed; left: 12px; bottom: 12px; z-index: 1500;
-  display: flex; gap: 4px; padding: 4px;
-  background: rgba(8 6 3 / 0.9); border: 1px solid var(--gold-border); border-radius: 8px;
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-}
-.font-switch button {
-  background: none; color: var(--text-muted); font: 600 11px/1 'Inter', sans-serif;
-  padding: 8px 10px; border-radius: 5px; letter-spacing: 0.04em;
-}
-.font-switch button.is-active { background: var(--primary); color: var(--bg-deep); }
 
 /* ═══ O firmie — układ redakcyjny (bez pudełka) ═══ */
 .about { background: var(--bg); border-block: 1px solid var(--border); position: relative; }
@@ -1600,4 +1589,24 @@ body::before {
 }
 @media (max-width: 899px) {
   .about__media { margin-bottom: 44px; }
+}
+
+
+/* ═══ Social w pasku górnym — po prawej od przycisku Kontakt ═══ */
+.nav__social { display: flex; align-items: center; gap: var(--sp-2); }
+.social__link--nav { width: 40px; height: 40px; }
+.social__link--nav svg { width: 17px; height: 17px; }
+/* W szufladzie mobilnej: własny wiersz pod nawigacją, pełne cele dotykowe */
+@media (max-width: 1023px) {
+  .nav__social {
+    width: 100%;
+    margin-top: var(--sp-4);
+    padding-top: var(--sp-6);
+    border-top: 1px solid var(--border);
+  }
+  .social__link--nav { width: 44px; height: 44px; }
+  .social__link--nav svg { width: 19px; height: 19px; }
+}
+@media (min-width: 1024px) {
+  .nav__social { margin-left: var(--sp-3); }
 }
