@@ -28,6 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+  <link rel="icon" type="image/png" href="assets/kapitello_logo_gold@2x.png">
   <link rel="stylesheet" href="styles.css">
 
   <!-- JSON-LD: LocalBusiness -->
@@ -70,7 +71,7 @@
       "opens": "08:00",
       "closes": "17:00"
     },
-    "sameAs": ["https://www.facebook.com/profile.php?id=61576152705499"]
+    "sameAs": ["https://www.facebook.com/profile.php?id=61576152705499", "https://www.instagram.com/kapitello"]
   }
   </script>
 </head>
@@ -104,7 +105,14 @@
 
     <!-- ═══ HERO ══════════════════════════════════════════════ -->
     <section id="hero" class="hero" aria-label="Baner główny">
-      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="hero__bg" aria-hidden="true">
+        <!-- Zdjęcia realizacji jako tło: powolny zoom + przenikanie (CSS, bez JS) -->
+        <div class="hero__slides">
+          <div class="hero__slide" style="background-image:url('assets/hero-1.jpg')"></div>
+          <div class="hero__slide" style="background-image:url('assets/hero-2.jpg')"></div>
+          <div class="hero__slide" style="background-image:url('assets/hero-3.jpg')"></div>
+        </div>
+      </div>
       <div class="hero__overlay" aria-hidden="true"></div>
       <div class="container hero__content">
         <div class="hero__badge fade-in-up">
@@ -112,7 +120,7 @@
           Fotowoltaika &amp; OZE · Zduńska Wola
         </div>
         <h1 class="hero__title fade-in-up fade-in-up--delay-1">
-          Przestań płacić za prąd.<br><span>Fotowoltaika i magazyny energii</span> dla <span class="rotator" data-slowa="Twojego domu.|Twojej firmy.|Twojego gospodarstwa."><span class="rotator__ghost" aria-hidden="true">Twojego gospodarstwa.</span><span class="rotator__text">Twojego domu.</span></span>
+          Przestań płacić za prąd.<br><span>Fotowoltaika i magazyny energii</span> dla <span class="rotator rotator--maszyna" data-slowa="Twojego domu.|Twojej firmy.|Twojego gospodarstwa."><span class="rotator__ghost" aria-hidden="true">Twojego gospodarstwa.</span><span class="rotator__text">Twojego domu.</span><span class="rotator__caret" aria-hidden="true"></span></span>
         </h1>
         <p class="hero__subtitle fade-in-up fade-in-up--delay-2">
           Instalacje fotowoltaiczne, magazyny energii i&nbsp;farmy PV w&nbsp;Zduńskiej Woli.
@@ -148,7 +156,7 @@
           <p class="section__subtitle">Wybrane projekty z naszego doświadczenia w całej Polsce.</p>
         </div>
         <div class="projects__grid">
-          <div class="project-item project-item--home reveal">
+          <div class="project-item project-item--home reveal" data-galeria="dach" data-liczba="3" role="button" tabindex="0">
             <div class="project-item__image" role="img" aria-label="Instalacja fotowoltaiczna na dachu budynku"></div>
             <div class="project-item__overlay" aria-hidden="true"></div>
             <div class="project-item__info">
@@ -156,7 +164,7 @@
               <p class="project-item__meta">Powiat zduńskowolski</p>
             </div>
           </div>
-          <div class="project-item project-item--farm reveal reveal--delay-1">
+          <div class="project-item project-item--farm reveal reveal--delay-1" data-galeria="grunt" data-liczba="6" role="button" tabindex="0">
             <div class="project-item__image" role="img" aria-label="Instalacja fotowoltaiczna wolnostojąca na gruncie"></div>
             <div class="project-item__overlay" aria-hidden="true"></div>
             <div class="project-item__info">
@@ -164,7 +172,7 @@
               <p class="project-item__meta">Region łódzki · konstrukcja wolnostojąca</p>
             </div>
           </div>
-          <div class="project-item project-item--large reveal reveal--delay-2">
+          <div class="project-item project-item--large reveal reveal--delay-2" data-galeria="wielkoformatowa" data-liczba="4" role="button" tabindex="0">
             <div class="project-item__image" role="img" aria-label="Wielkoformatowa instalacja fotowoltaiczna"></div>
             <div class="project-item__overlay" aria-hidden="true"></div>
             <div class="project-item__info">
@@ -172,7 +180,7 @@
               <p class="project-item__meta">Region łódzki · obiekt komercyjny</p>
             </div>
           </div>
-          <div class="project-item project-item--storage reveal reveal--delay-3">
+          <div class="project-item project-item--storage reveal reveal--delay-3" data-galeria="magazyn" data-liczba="8" role="button" tabindex="0">
             <div class="project-item__image" role="img" aria-label="Magazyn energii i falownik w pomieszczeniu technicznym"></div>
             <div class="project-item__overlay" aria-hidden="true"></div>
             <div class="project-item__info">
@@ -294,48 +302,30 @@
     <!-- ═══ O NAS ══════════════════════════════════════════════ -->
     <section id="o-nas" class="section about" aria-labelledby="about-title">
       <div class="container">
-        <div class="about__content">
-          <div class="reveal">
-            <p class="section__eyebrow">O firmie</p>
-            <h2 class="section__title" id="about-title">Twoje zaufane źródło czystej energii</h2>
-            <p class="about__text">
-              Jesteśmy firmą z wieloletnim doświadczeniem w branży energii odnawialnej. Naszą
-              misją jest dostarczanie nowoczesnych i efektywnych rozwiązań, które pozwalają naszym
-              klientom na niezależność energetyczną i realne oszczędności.
-            </p>
-            <p class="about__text">
-              Specjalizujemy się w projektowaniu i montażu instalacji fotowoltaicznych dla klientów
-              indywidualnych i biznesowych. Działamy kompleksowo – od audytu, przez projekt i montaż,
-              aż po pomoc w pozyskaniu finansowania i dotacji OZE.
-            </p>
-          </div>
-          <div class="about__features reveal reveal--delay-1">
-            <div class="about__feature">
-              <div class="about__feature-icon" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <div class="about__feature-body">
-                <h4>Certyfikowani instalatorzy</h4>
-                <p>Nasz zespół posiada wszystkie wymagane uprawnienia i certyfikaty branżowe.</p>
-              </div>
-            </div>
-            <div class="about__feature">
-              <div class="about__feature-icon" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-              </div>
-              <div class="about__feature-body">
-                <h4>Pomoc w finansowaniu</h4>
-                <p>Prowadzimy przez cały proces pozyskiwania dotacji i dofinansowań na OZE.</p>
-              </div>
-            </div>
-            <div class="about__feature">
-              <div class="about__feature-icon" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              </div>
-              <div class="about__feature-body">
-                <h4>Gwarancja i serwis</h4>
-                <p>Oferujemy długoterminową gwarancję i bieżące wsparcie techniczne po montażu.</p>
-              </div>
+        <div class="about__frame reveal">
+          <span class="about__corner about__corner--tl" aria-hidden="true"></span>
+          <span class="about__corner about__corner--tr" aria-hidden="true"></span>
+          <span class="about__corner about__corner--bl" aria-hidden="true"></span>
+          <span class="about__corner about__corner--br" aria-hidden="true"></span>
+
+          <div class="about__content">
+            <div class="about__photo" role="img" aria-label="Instalacja fotowoltaiczna zrealizowana przez Kapitello"></div>
+            <div class="about__body">
+              <p class="section__eyebrow">O firmie</p>
+              <h2 class="section__title" id="about-title">Kapitello — energia z&nbsp;natury</h2>
+              <p class="about__text">
+                Firma z Zduńskiej Woli. Projektujemy i montujemy instalacje fotowoltaiczne oraz
+                magazyny energii dla domów, firm i gospodarstw w województwie łódzkim.
+              </p>
+              <p class="about__text">
+                Działamy kompleksowo: audyt, projekt, montaż, formalności i pomoc w pozyskaniu
+                dotacji. Jeden wykonawca od pierwszej rozmowy po uruchomienie instalacji.
+              </p>
+              <ul class="about__list" role="list">
+                <li><strong>Certyfikowani instalatorzy</strong> — wymagane uprawnienia i certyfikaty branżowe</li>
+                <li><strong>Pomoc w finansowaniu</strong> — dotacje i dofinansowania na OZE</li>
+                <li><strong>Gwarancja i serwis</strong> — wsparcie techniczne po montażu</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -399,6 +389,17 @@
                 <strong>E-mail</strong>
                 <a href="mailto:biuro@kapitello.pl">biuro@kapitello.pl</a>
               </div>
+            </div>
+
+
+            <div class="contact__social" aria-label="Kapitello w mediach społecznościowych">
+              <span class="contact__social-label">Obserwuj nas</span>
+              <a class="social__link" href="https://www.facebook.com/profile.php?id=61576152705499" target="_blank" rel="noopener noreferrer" aria-label="Kapitello na Facebooku">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+              </a>
+              <a class="social__link" href="https://www.instagram.com/kapitello" target="_blank" rel="noopener noreferrer" aria-label="Kapitello na Instagramie">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+              </a>
             </div>
 
             <div class="contact__map">
@@ -467,22 +468,6 @@
           </a>
           <p>Twój partner w energii odnawialnej. Instalacje PV, farmy słoneczne i finansowanie ekologiczne w Zduńskiej Woli.</p>
 
-          <!-- Social media. UWAGA: adres Instagrama jest tymczasowy —
-               podmienić na prawdziwy profil klienta przed publikacją. -->
-          <div class="social" aria-label="Kapitello w mediach społecznościowych">
-            <a class="social__link"
-               href="https://www.facebook.com/profile.php?id=61576152705499"
-               target="_blank" rel="noopener noreferrer"
-               aria-label="Kapitello na Facebooku">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
-            </a>
-            <a class="social__link"
-               href="https://www.instagram.com/"
-               target="_blank" rel="noopener noreferrer"
-               aria-label="Kapitello na Instagramie">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
-            </a>
-          </div>
         </div>
         <div class="footer__links">
           <div class="footer__col">
@@ -521,6 +506,18 @@
       </div>
     </div>
   </footer>
+
+
+  <!-- Galeria realizacji (lightbox) — wypełniana przez script.js -->
+  <div class="lightbox" id="lightbox" hidden aria-modal="true" role="dialog" aria-label="Galeria realizacji">
+    <button type="button" class="lightbox__close" aria-label="Zamknij galerię">&times;</button>
+    <button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Poprzednie zdjęcie">&#8249;</button>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" src="" alt="">
+      <figcaption class="lightbox__caption"><strong></strong><span></span><em></em></figcaption>
+    </figure>
+    <button type="button" class="lightbox__nav lightbox__nav--next" aria-label="Następne zdjęcie">&#8250;</button>
+  </div>
 
   <script src="script.js"></script>
 </body>

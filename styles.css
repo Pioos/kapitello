@@ -1423,3 +1423,138 @@ body::before {
     min-height: 44px;
   }
 }
+
+/* ═══ Hero: zdjęcia realizacji w tle (powolny zoom + przenikanie) ═══ */
+.hero__slides { position: absolute; inset: 0; overflow: hidden; }
+.hero__slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0;
+  animation: heroSlide 24s infinite;
+  will-change: opacity, transform;
+}
+.hero__slide:nth-child(2) { animation-delay: 8s; }
+.hero__slide:nth-child(3) { animation-delay: 16s; }
+@keyframes heroSlide {
+  0%      { opacity: 0;   transform: scale(1);    }
+  8%      { opacity: .55; }
+  33%     { opacity: .55; }
+  42%     { opacity: 0;   transform: scale(1.08); }
+  100%    { opacity: 0;   transform: scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__slide { animation: none; opacity: 0; }
+  .hero__slide:first-child { opacity: .45; }
+}
+/* Zdjęcie w tle wymaga mocniejszego przyciemnienia pod tekstem */
+.hero__overlay {
+  background: linear-gradient(160deg, rgba(8 6 3 / 0.78) 0%, rgba(8 6 3 / 0.45) 50%, rgba(8 6 3 / 0.85) 100%);
+}
+
+/* ═══ Maszyna do pisania w nagłówku ═══ */
+.rotator--maszyna .rotator__text { transition: none; }
+.rotator--maszyna.is-swapping .rotator__text { opacity: 1; transform: none; }
+.rotator__caret {
+  display: inline-block;
+  width: 0.06em; height: 0.9em;
+  margin-left: 0.06em;
+  background: var(--primary);
+  vertical-align: -0.08em;
+  animation: caret 1s steps(1) infinite;
+  grid-area: auto;
+}
+.rotator--maszyna { grid-template-columns: auto auto; align-items: baseline; }
+.rotator--maszyna .rotator__ghost,
+.rotator--maszyna .rotator__text { grid-area: 1 / 1; }
+.rotator--maszyna .rotator__caret { grid-area: 1 / 2; align-self: center; }
+@keyframes caret { 50% { opacity: 0; } }
+
+/* ═══ Social przy kontakcie ═══ */
+.contact__social {
+  display: flex; align-items: center; gap: var(--sp-3);
+  margin: var(--sp-6) 0;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border);
+}
+.contact__social-label {
+  margin-right: auto;
+  font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-muted);
+}
+.social__link {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--gold-border); color: var(--primary); background: var(--surface);
+  transition: color 200ms, border-color 200ms, background 200ms, transform 200ms var(--ease);
+}
+.social__link:hover { color: var(--bg-deep); border-color: transparent; background: linear-gradient(135deg, var(--primary), var(--amber) 55%, var(--copper)); transform: translateY(-3px); }
+.social__link svg { width: 20px; height: 20px; }
+
+/* ═══ O firmie w ramce ═══ */
+.about__frame {
+  position: relative;
+  padding: clamp(28px, 5vw, 56px);
+  border: 1px solid var(--gold-border);
+  background: linear-gradient(135deg, rgba(201 164 92 / 0.06), transparent 60%), var(--bg-card);
+}
+.about__corner {
+  position: absolute; width: 28px; height: 28px;
+  border: 2px solid var(--primary);
+}
+.about__corner--tl { top: -2px; left: -2px;  border-right: 0; border-bottom: 0; }
+.about__corner--tr { top: -2px; right: -2px; border-left: 0;  border-bottom: 0; }
+.about__corner--bl { bottom: -2px; left: -2px;  border-right: 0; border-top: 0; }
+.about__corner--br { bottom: -2px; right: -2px; border-left: 0;  border-top: 0; }
+.about__frame .about__content { display: grid; grid-template-columns: 1fr; gap: var(--sp-8); align-items: center; }
+.about__photo {
+  aspect-ratio: 4 / 3; min-height: 240px;
+  background: url('assets/galeria/grunt-3.jpg') center / cover no-repeat;
+  border: 1px solid var(--gold-border);
+  box-shadow: 16px 16px 0 -8px rgba(201 164 92 / 0.18);
+}
+.about__list { display: grid; gap: var(--sp-3); margin-top: var(--sp-6); }
+.about__list li { position: relative; padding-left: 22px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
+.about__list li::before { content: '◆'; position: absolute; left: 0; top: 0.15em; font-size: 0.65rem; color: var(--primary); }
+.about__list strong { color: var(--text); }
+@media (min-width: 900px) {
+  .about__frame .about__content { grid-template-columns: 5fr 7fr; gap: var(--sp-12); }
+}
+
+/* ═══ Realizacje: kliknięcie otwiera galerię ═══ */
+.project-item { cursor: pointer; }
+.project-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.project-item__count {
+  position: absolute; top: 14px; right: 14px; z-index: 3;
+  padding: 4px 10px; border-radius: 50px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+  color: var(--bg-deep); background: var(--primary);
+}
+@media (max-width: 767px) {
+  /* Na telefonie nie ma hover, a dotknięcie otwiera galerię — meta widoczna od razu */
+  .project-item__info p.project-item__meta { max-height: 60px; opacity: 1; transform: none; }
+}
+
+/* ═══ Lightbox ═══ */
+.lightbox {
+  position: fixed; inset: 0; z-index: 2000;
+  display: grid; grid-template-columns: 56px 1fr 56px; align-items: center;
+  background: rgba(8 6 3 / 0.94);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.lightbox[hidden] { display: none; }
+.lightbox__figure { margin: 0; text-align: center; padding: 24px 0; max-height: 100vh; display: grid; grid-template-rows: 1fr auto; gap: 14px; }
+.lightbox__img { max-width: 100%; max-height: 78vh; margin: 0 auto; object-fit: contain; border: 1px solid var(--gold-border); }
+.lightbox__caption { font-size: 0.9rem; color: var(--text-muted); display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.lightbox__caption strong { color: var(--text); }
+.lightbox__caption em { font-style: normal; color: var(--primary); }
+.lightbox__nav, .lightbox__close {
+  background: none; color: var(--text); font-size: 2.4rem; line-height: 1;
+  width: 56px; height: 56px; display: grid; place-items: center; border-radius: 50%;
+  transition: background 200ms, color 200ms;
+}
+.lightbox__nav:hover, .lightbox__close:hover { background: var(--surface-h); color: var(--primary); }
+.lightbox__close { position: absolute; top: 12px; right: 12px; font-size: 2rem; }
+@media (max-width: 600px) {
+  .lightbox { grid-template-columns: 44px 1fr 44px; }
+  .lightbox__nav, .lightbox__close { width: 44px; height: 44px; font-size: 1.8rem; }
+}

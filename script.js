@@ -144,61 +144,42 @@ function initRotator() {
   const slowa = (el.dataset.slowa || '').split('|').filter(Boolean);
   if (slowa.length < 2) return;
 
-  let i = 0;
-
-  // Szerokość liczymy dla konkretnej frazy — inaczej po krótszym słowie
-  // zostawałaby przerwa zarezerwowana pod najdłuższe.
-  function dopasujSzerokosc(fraza) {
-    duch.textContent = fraza;
-    el.style.width = duch.getBoundingClientRect().width + 'px';
-  }
-
-  // Najdłuższa fraza zawija nagłówek do dodatkowej linii. Bez rezerwacji
-  // wysokości cała treść pod spodem podskakiwałaby przy każdej zmianie,
-  // dlatego mierzymy H1 dla każdej frazy i blokujemy najwyższy wynik.
+  // "Duch" trzyma szerokość najdłuższej frazy, więc linia nie skacze
+  // podczas pisania i kasowania. Rezerwujemy też wysokość H1.
   const naglowek = el.closest('h1');
-
   function zarezerwujWysokosc() {
     if (!naglowek) return;
     const zapamietana = tekst.textContent;
-    // Bez wyłączenia przejścia pomiar łapie szerokość w połowie animacji
-    // i najdłuższa fraza nie zdąży zawinąć wiersza — wysokość wychodzi za mała.
-    el.style.transition = 'none';
     naglowek.style.minHeight = '';
     let max = 0;
-    slowa.forEach(fraza => {
-      tekst.textContent = fraza;
-      dopasujSzerokosc(fraza);
-      max = Math.max(max, naglowek.getBoundingClientRect().height);
-    });
+    slowa.forEach(f => { tekst.textContent = f; max = Math.max(max, naglowek.getBoundingClientRect().height); });
     tekst.textContent = zapamietana;
-    dopasujSzerokosc(zapamietana);
     naglowek.style.minHeight = Math.ceil(max) + 'px';
-    void el.offsetWidth;          // wymuszenie przeliczenia przed przywróceniem animacji
-    el.style.transition = '';
   }
+  const start = () => zarezerwujWysokosc();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
+  window.addEventListener('resize', zarezerwujWysokosc, { passive: true });
 
-  // Pomiar musi poczekać na wczytanie kroju, bo szerokość liczy się z fontu.
-  const ustawStart = () => { dopasujSzerokosc(slowa[i]); zarezerwujWysokosc(); };
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(ustawStart);
-  } else {
-    ustawStart();
-  }
-  window.addEventListener('resize', () => { dopasujSzerokosc(slowa[i]); zarezerwujWysokosc(); }, { passive: true });
-
-  // Szanujemy ustawienie systemowe "ogranicz animacje"
+  // Bez animacji przy ustawieniu systemowym "ogranicz ruch" — zostaje pierwsza fraza
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  setInterval(() => {
-    el.classList.add('is-swapping');
-    setTimeout(() => {
-      i = (i + 1) % slowa.length;
-      tekst.textContent = slowa[i];
-      dopasujSzerokosc(slowa[i]);   // szerokość jedzie płynnie, tekst jest wtedy niewidoczny
-      el.classList.remove('is-swapping');
-    }, 240);
-  }, 3200);
+  // Efekt maszyny do pisania: pisze znak po znaku, chwilę trzyma, kasuje, następna fraza
+  let i = 0, poz = slowa[0].length, kasuje = false;
+  const PISZ = 70, KASUJ = 40, PAUZA_PELNA = 2400, PAUZA_PUSTA = 350;
+  function krok() {
+    const fraza = slowa[i];
+    if (!kasuje) {
+      poz++;
+      tekst.textContent = fraza.slice(0, poz);
+      if (poz >= fraza.length) { kasuje = true; return setTimeout(krok, PAUZA_PELNA); }
+      return setTimeout(krok, PISZ + Math.random() * 40);
+    }
+    poz--;
+    tekst.textContent = fraza.slice(0, poz);
+    if (poz <= 0) { kasuje = false; i = (i + 1) % slowa.length; return setTimeout(krok, PAUZA_PUSTA); }
+    setTimeout(krok, KASUJ);
+  }
+  setTimeout(krok, PAUZA_PELNA);
 }
 
 // ── Hero hex canvas ────────────────────────────────────────
@@ -317,13 +298,52 @@ function initHeroCanvas() {
   draw();
 }
 
-// ── Realizacje: lokalizacja po dotknięciu (telefon) ─────────
-// Na desktopie wystarczy :hover z CSS. Na telefonie hover nie istnieje,
-// więc pierwszy dotyk kafelka odsłania szczegóły, kolejny je chowa.
-document.querySelectorAll('.project-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const byl = item.classList.contains('is-open');
-    document.querySelectorAll('.project-item.is-open').forEach(i => i.classList.remove('is-open'));
-    if (!byl) item.classList.add('is-open');
+// ── Realizacje: galeria (lightbox) per kategoria ────────────
+// Kliknięcie kafelka otwiera zdjęcia z tej kategorii. Pliki leżą w
+// assets/galeria/<kategoria>-<n>.jpg, liczba w data-liczba.
+(function initGaleria() {
+  const lb = document.getElementById('lightbox');
+  if (!lb) return;
+  const img = lb.querySelector('.lightbox__img');
+  const cap = lb.querySelector('.lightbox__caption');
+  let zdjecia = [], idx = 0, tytul = '', meta = '';
+
+  function pokaz(n) {
+    idx = (n + zdjecia.length) % zdjecia.length;
+    img.src = zdjecia[idx];
+    img.alt = `${tytul} — zdjęcie ${idx + 1} z ${zdjecia.length}`;
+    cap.querySelector('strong').textContent = tytul;
+    cap.querySelector('span').textContent = meta;
+    cap.querySelector('em').textContent = `${idx + 1} / ${zdjecia.length}`;
+  }
+  function otworz(item) {
+    const kat = item.dataset.galeria, n = parseInt(item.dataset.liczba, 10) || 0;
+    if (!kat || !n) return;
+    zdjecia = Array.from({ length: n }, (_, k) => `assets/galeria/${kat}-${k + 1}.jpg`);
+    tytul = item.querySelector('h3')?.textContent.trim() || '';
+    meta  = item.querySelector('.project-item__meta')?.textContent.trim() || '';
+    lb.hidden = false; document.body.style.overflow = 'hidden';
+    pokaz(0);
+  }
+  function zamknij() { lb.hidden = true; document.body.style.overflow = ''; }
+
+  document.querySelectorAll('.project-item[data-galeria]').forEach(item => {
+    // licznik zdjęć na kafelku
+    const badge = document.createElement('span');
+    badge.className = 'project-item__count';
+    badge.textContent = `${item.dataset.liczba} zdjęć`;
+    item.appendChild(badge);
+    item.addEventListener('click', () => otworz(item));
+    item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); otworz(item); } });
   });
-});
+  lb.querySelector('.lightbox__close').addEventListener('click', zamknij);
+  lb.querySelector('.lightbox__nav--prev').addEventListener('click', () => pokaz(idx - 1));
+  lb.querySelector('.lightbox__nav--next').addEventListener('click', () => pokaz(idx + 1));
+  lb.addEventListener('click', e => { if (e.target === lb) zamknij(); });
+  document.addEventListener('keydown', e => {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') zamknij();
+    if (e.key === 'ArrowLeft') pokaz(idx - 1);
+    if (e.key === 'ArrowRight') pokaz(idx + 1);
+  });
+})();
