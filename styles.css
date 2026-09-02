@@ -1617,21 +1617,22 @@ body::before {
   background: var(--bg-card); border: 1px solid var(--gold-border); border-radius: var(--r-xl);
   transition: flex 650ms var(--ease), border-color 200ms;
 }
-.acc__panel:hover, .acc__panel:focus-visible, .acc__panel.is-open { flex: 4; border-color: var(--gold-border-s); }
+/* Domyślnie rozwinięty panel (is-open) ustępuje, gdy użytkownik najedzie na inny */
+.acc__panel:hover, .acc__panel:focus-visible, .acc:not(:hover) .acc__panel.is-open { flex: 4; border-color: var(--gold-border-s); }
 .acc__panel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.85); transition: transform 900ms var(--ease), filter 300ms; }
-.acc__panel:hover img, .acc__panel.is-open img { transform: scale(1.04); filter: saturate(1); }
+.acc__panel:hover img, .acc:not(:hover) .acc__panel.is-open img { transform: scale(1.04); filter: saturate(1); }
 .acc__panel::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8 6 3 / 0.92) 0%, rgba(8 6 3 / 0.35) 55%, rgba(8 6 3 / 0.15) 100%); }
 .acc__label {
   position: absolute; z-index: 2; left: 50%; top: 24px; transform: translateX(-50%);
   writing-mode: vertical-rl; font-family: var(--font-ui); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--accent); white-space: nowrap; transition: opacity 250ms;
 }
-.acc__panel:hover .acc__label, .acc__panel.is-open .acc__label { opacity: 0; }
+.acc__panel:hover .acc__label, .acc:not(:hover) .acc__panel.is-open .acc__label { opacity: 0; }
 .acc__body {
   position: absolute; z-index: 3; left: 28px; right: 28px; bottom: 28px; max-width: 420px;
   opacity: 0; transform: translateY(14px); transition: opacity 350ms 120ms, transform 450ms 120ms var(--ease);
 }
-.acc__panel:hover .acc__body, .acc__panel:focus-visible .acc__body, .acc__panel.is-open .acc__body { opacity: 1; transform: none; }
+.acc__panel:hover .acc__body, .acc__panel:focus-visible .acc__body, .acc:not(:hover) .acc__panel.is-open .acc__body { opacity: 1; transform: none; }
 .acc__body h3 { font-family: var(--font-display); font-size: clamp(1.4rem, 2.4vw, 2rem); color: var(--text); line-height: 1.1; }
 .acc__body p { margin-top: 8px; color: var(--text-muted); font-size: 0.95rem; max-width: 40ch; }
 .acc__more { display: inline-block; margin-top: 14px; color: var(--primary); font-weight: 600; font-size: 0.9rem; border-bottom: 1px solid var(--gold-border-s); padding-bottom: 2px; }
@@ -1640,6 +1641,9 @@ body::before {
   .acc { flex-direction: column; height: auto; gap: 8px; }
   .acc__panel { flex: none; height: 96px; }
   .acc__panel.is-open { flex: none; height: 340px; }
+  /* Na dotyku po tapnięciu element jest w stanie :hover, więc stan otwarty musi działać niezależnie od niego */
+  .acc__panel.is-open .acc__body { opacity: 1; transform: none; }
+  .acc__panel.is-open img { transform: scale(1.04); filter: saturate(1); }
   .acc__panel:hover { flex: none; }
   .acc__panel:hover:not(.is-open) .acc__label { opacity: 1; }
   .acc__panel:hover:not(.is-open) .acc__body { opacity: 0; }
