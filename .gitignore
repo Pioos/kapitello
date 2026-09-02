@@ -26,3 +26,7 @@ desktop.ini
 
 # Node (backend/CRM)
 node_modules/
+
+# Oryginały zdjęć od klienta (duże pliki)
+assets/falowniki magazyny/
+assets/panele foto/
